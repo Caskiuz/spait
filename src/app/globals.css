@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Sound Tech Peru — Design tokens
+   Extraidos de las capturas de referencia del cliente (docs/referencias).
+   Tema oscuro calido con acento naranja y glows ambares.
+   ========================================================================== */
+
+@theme {
+  /* --- Tipografia ------------------------------------------------------ */
+  --font-display: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-sans: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+
+  /* --- Superficies (negro calido) -------------------------------------- */
+  --color-ink-950: #08080a;
+  --color-ink-925: #0c0c0e;
+  --color-ink-900: #101012;
+  --color-ink-850: #141417;
+  --color-ink-800: #1a1a1e;
+  --color-ink-750: #202025;
+  --color-ink-700: #26262c;
+  --color-ink-600: #33333a;
+  --color-ink-500: #4a4a53;
+
+  /* --- Acento naranja -------------------------------------------------- */
+  --color-brand-300: #ffc38a;
+  --color-brand-400: #ffa245;
+  --color-brand-500: #ff8a1a;
+  --color-brand-600: #ff6b00;
+  --color-brand-700: #e85c00;
+  --color-brand-800: #bf4900;
+
+  /* --- Neutros de texto ------------------------------------------------ */
+  --color-fog-100: #f5f5f6;
+  --color-fog-200: #e4e4e7;
+  --color-fog-300: #c9c9cf;
+  --color-fog-400: #a1a1aa;
+  --color-fog-500: #7c7c85;
+  --color-fog-600: #5a5a63;
+
+  /* --- Bordes ---------------------------------------------------------- */
+  --color-hairline: rgba(255, 255, 255, 0.08);
+  --color-hairline-strong: rgba(255, 255, 255, 0.14);
+
+  /* --- Radios ---------------------------------------------------------- */
+  --radius-card: 1.125rem;
+  --radius-card-lg: 1.375rem;
+  --radius-pill: 999px;
+
+  /* --- Sombras y glows ------------------------------------------------- */
+  --shadow-glow-sm: 0 0 24px -6px rgba(255, 107, 0, 0.45);
+  --shadow-glow: 0 0 48px -10px rgba(255, 107, 0, 0.55);
+  --shadow-card: 0 18px 44px -22px rgba(0, 0, 0, 0.95);
+  --shadow-lift: 0 24px 60px -26px rgba(0, 0, 0, 1);
+
+  /* --- Animaciones ----------------------------------------------------- */
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-pulse-glow: pulse-glow 4.5s ease-in-out infinite;
+  --animate-float-slow: float-slow 9s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-hairline);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-fog-100);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-600);
+    color: #fff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar acorde al tema oscuro */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-925);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-700);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-600);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Utilidades del sistema
+   ========================================================================== */
+
+/* Titular pesado en mayusculas, el sello visual de la marca */
+@utility headline {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.94;
+}
+
+/* Eyebrow: etiqueta pequena sobre los titulares */
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-fog-400);
+}
+
+/* Texto con relleno degradado naranja */
+@utility text-gradient-brand {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-500) 0%,
+    var(--color-brand-600) 55%,
+    var(--color-brand-700) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Relleno degradado naranja para botones y barras */
+@utility bg-gradient-brand {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-500) 0%,
+    var(--color-brand-600) 60%,
+    var(--color-brand-700) 100%
+  );
+}
+
+/* Superficie de tarjeta estandar */
+@utility surface-card {
+  background-color: color-mix(in oklab, var(--color-ink-850) 82%, transparent);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-card);
+}
+
+/* Barra superior con desenfoque, usada por la navbar flotante */
+@utility glass-bar {
+  background-color: color-mix(in oklab, var(--color-ink-900) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--color-hairline);
+}
+
+/* Glow radial ambar de fondo — el recurso atmosferico de las capturas */
+@utility glow-blob {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* Textura de puntos decorativa junto a imagenes */
+@utility dot-pattern {
+  background-image: radial-gradient(
+    currentColor 1px,
+    transparent 1.4px
+  );
+  background-size: 11px 11px;
+}
+
+/* Grano sutil sobre imagenes de fondo */
+@utility grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.14;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* Contenedor con el ancho de las capturas */
+@utility shell {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Oculta la barra de scroll en los carruseles horizontales */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240" role="img" aria-label="client-san-francisco-de-borja">
+  <title>client-san-francisco-de-borja</title>
+  <defs>
+    <linearGradient id="gclient-san-francisco-de-borja" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#991b1b"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </linearGradient>
+  </defs>
+  <path d="M100 8 L188 34 V128 C188 178 148 214 100 232 C52 214 12 178 12 128 V34 Z"
+        fill="url(#gclient-san-francisco-de-borja)" stroke="#fbbf24" stroke-width="5"/>
+  <path d="M100 22 L176 44 V128 C176 171 141 202 100 218 C59 202 24 171 24 128 V44 Z"
+        fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2.5"/>
+  <text x="100" y="140" text-anchor="middle" font-family="Montserrat, Arial, sans-serif"
+        font-size="66" font-weight="800" fill="#ffffff" letter-spacing="2">SFB</text>
+</svg>
