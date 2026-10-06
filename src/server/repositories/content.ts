@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { getPrisma } from "@/lib/db";
+import { env } from "@/lib/env";
 import {
   clients as clientSeed,
   course as courseSeed,
@@ -41,14 +42,22 @@ const REVALIDATE_SECONDS = 300;
 
 export type SiteSettingsView = typeof settingsSeed;
 
+/**
+ * Ajustes base con la URL del entorno actual ya aplicada.
+ * `siteUrl` nunca viene de la base de datos: es lo unico que cambia entre
+ * local, preview y produccion, asi que se resuelve siempre en tiempo de
+ * ejecucion (ver src/lib/env.ts).
+ */
+const baseSettings = { ...settingsSeed, siteUrl: env.siteUrl };
+
 export const getSiteSettings = unstable_cache(
   async (): Promise<SiteSettingsView> => {
     const prisma = getPrisma();
-    if (!prisma) return settingsSeed;
+    if (!prisma) return baseSettings;
 
     try {
       const rows = await prisma.siteSetting.findMany({ where: { group: "general" } });
-      if (!rows.length) return settingsSeed;
+      if (!rows.length) return baseSettings;
 
       // SiteSetting.value es Json: solo aplicamos claves conocidas cuyo valor
       // guardado coincide con el tipo del valor por defecto. Asi un ajuste mal
@@ -65,10 +74,10 @@ export const getSiteSettings = unstable_cache(
 
       // El cast es seguro: cada valor de `stored` ya se contrasto contra el
       // tipo de su equivalente en settingsSeed justo arriba.
-      return { ...settingsSeed, ...stored } as SiteSettingsView;
+      return { ...baseSettings, ...stored } as SiteSettingsView;
     } catch (error) {
       console.error("[contenido] fallo al leer SiteSetting, se usa el respaldo:", error);
-      return settingsSeed;
+      return baseSettings;
     }
   },
   ["site-settings"],

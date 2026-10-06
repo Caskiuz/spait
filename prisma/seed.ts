@@ -137,6 +137,8 @@ function generatePassword(): string {
 }
 
 async function seedSettings() {
+  // `siteUrl` no se guarda a proposito: cambia entre local, preview y
+  // produccion, y se resuelve en tiempo de ejecucion desde el entorno.
   const entries: [string, string | number][] = [
     ["companyName", siteSettings.companyName],
     ["legalName", siteSettings.legalName],
@@ -148,7 +150,6 @@ async function seedSettings() {
     ["address", siteSettings.address],
     ["hours", siteSettings.hours],
     ["yearsOfExperience", siteSettings.yearsOfExperience],
-    ["siteUrl", siteSettings.siteUrl],
     ["seoTitleTemplate", siteSettings.seoTitleTemplate],
     ["seoDescription", siteSettings.seoDescription],
   ];

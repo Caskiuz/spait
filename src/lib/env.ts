@@ -14,6 +14,34 @@
  * Ninguna ruta debe romper si falta una variable: se degrada la funcionalidad.
  */
 
+/**
+ * URL publica del sitio.
+ *
+ * Orden de resolucion:
+ *  1. NEXT_PUBLIC_SITE_URL, si esta definida (dominio propio del cliente).
+ *  2. VERCEL_PROJECT_PRODUCTION_URL, que Vercel define sola en produccion.
+ *  3. VERCEL_URL, la URL del despliegue actual (previews incluidos).
+ *  4. localhost, para desarrollo.
+ *
+ * Gracias a los dos valores que Vercel inyecta automaticamente, no hace falta
+ * configurar nada a mano para que el sitemap, el canonical y las etiquetas
+ * Open Graph apunten al dominio correcto en cada entorno.
+ */
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) return explicit.replace(/\/$/, "");
+
+  const production = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (production) return `https://${production.replace(/\/$/, "")}`;
+
+  const deployment = process.env.VERCEL_URL?.trim();
+  if (deployment) return `https://${deployment.replace(/\/$/, "")}`;
+
+  return "http://localhost:3000";
+}
+
+export const siteUrl = resolveSiteUrl();
+
 const raw = {
   databaseUrl: process.env.DATABASE_URL,
   directUrl: process.env.DIRECT_URL,
@@ -32,8 +60,6 @@ const raw = {
 
   upstashUrl: process.env.UPSTASH_REDIS_REST_URL,
   upstashToken: process.env.UPSTASH_REDIS_REST_TOKEN,
-
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
 } as const;
 
 export const env = {
@@ -65,7 +91,7 @@ export const env = {
   },
 
   get siteUrl(): string {
-    return raw.siteUrl ?? "http://localhost:3000";
+    return siteUrl;
   },
 
   get mailFrom(): string {

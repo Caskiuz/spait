@@ -15,7 +15,13 @@ export const siteSettings: SiteSettingsContent = {
   address: "Lima, Perú",
   hours: "Lun a Sáb · 9:00 a 19:00",
   yearsOfExperience: 10,
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  /**
+   * Valor de relleno. La URL real se resuelve en tiempo de ejecucion desde
+   * src/lib/env.ts (NEXT_PUBLIC_SITE_URL o la que inyecta Vercel) y se aplica
+   * en el repositorio: este archivo no debe leer variables de entorno porque
+   * también se importa desde componentes de cliente.
+   */
+  siteUrl: "http://localhost:3000",
   seoTitleTemplate: "%s | Sound Tech Perú",
   seoDescription:
     "Soluciones profesionales de audio e integración tecnológica. Audio profesional, acústica, conferencia y votación, control integrado, iluminación, videoproyección, CCTV y cableado estructurado. Formación de ingenieros de sonido en Perú.",
