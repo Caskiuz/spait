@@ -189,9 +189,9 @@ tests/
 - **Cableado Estructurado**: es el único servicio sin PDF propio. El primer
   párrafo es del cliente y el resto sigue provisional.
 - **URLs definitivas** de Facebook, Instagram y TikTok: los perfiles están
-  marcados como pendientes en .
+  marcados como pendientes en `src/content/site.ts`.
 - **Correo de contacto**: el material solo indica el teléfono y el dominio, así
-  que se mantiene  sin confirmar.
+  que se mantiene `soundtechperu@gmail.com` sin confirmar.
 - **Razón social, RUC y dirección** para completar la política de privacidad.
 - **Fotos para las páginas sin diseño**: proyectos, galería y clientes usan
   todavía marcadores de posición, porque el cliente solo entregó Home y Nosotros.
