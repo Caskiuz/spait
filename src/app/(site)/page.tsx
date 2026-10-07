@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeHero } from "@/components/site/sections/home-hero";
+import { VideoHero } from "@/components/site/sections/video-hero";
 import { AboutSplit } from "@/components/site/sections/about-split";
 import { ServicesShowcase } from "@/components/site/sections/services-showcase";
 import { AcademyBanner } from "@/components/site/sections/academy-banner";
@@ -66,12 +66,13 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <HomeHero
+      <VideoHero
+        eyebrow="Audio · Tecnología · Experiencia"
         titleLead={homeContent.hero.titleLead}
         titleAccent={homeContent.hero.titleAccent}
         primaryCta={homeContent.hero.primaryCta}
         secondaryCta={homeContent.hero.secondaryCta}
-        imageKey="hero-home"
+        posterKey="hero-video-poster"
       />
 
       {/* En la portada el titular va íntegramente en blanco, como en la
@@ -82,8 +83,8 @@ export default async function HomePage() {
         titleAccent=""
         body={homeContent.about.body}
         cta={homeContent.about.cta}
-        imageKeys={["hero-nosotros", "hero-galeria"]}
-        decorativeKey="audio-1"
+        imageKey="home-nosotros"
+        decorativeKey="deco-disco"
       />
 
       <ServicesShowcase
@@ -108,7 +109,7 @@ export default async function HomePage() {
         ]}
         cta={homeContent.academy.cta}
         enrollCard={homeContent.academy.enrollCard}
-        imageKey="academy-photo"
+        imageKey="fondo-matriculate"
       />
 
       <ClientsCarousel
@@ -135,7 +136,7 @@ export default async function HomePage() {
         titleAccent={homeContent.faq.titleAccent}
         subtitle={homeContent.faq.subtitle}
         cta={homeContent.faq.cta}
-        imageKey="faq-photo"
+        imageKey="home-preguntas"
       />
     </>
   );

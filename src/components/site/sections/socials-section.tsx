@@ -38,7 +38,7 @@ export function SocialsSection({
       <GlowBlob
         className="left-1/2 top-4 -translate-x-1/2 opacity-55"
         size={620}
-        color="rgba(255,107,0,0.28)"
+        color="rgba(235,93,26,0.28)"
       />
 
       <Container className="relative">
@@ -48,7 +48,7 @@ export function SocialsSection({
             className="headline text-4xl sm:text-5xl md:text-6xl lg:text-[4rem]"
             style={{
               textShadow:
-                "0 0 48px rgba(255,107,0,0.35), 0 0 100px rgba(255,107,0,0.18)",
+                "0 0 48px rgba(235,93,26,0.35), 0 0 100px rgba(235,93,26,0.18)",
             }}
           >
             <span className="text-white">{title}</span>

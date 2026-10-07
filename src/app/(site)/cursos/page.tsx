@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import {
-  Award,
-  BadgeCheck,
-  BriefcaseBusiness,
-  Sparkles,
-  Waves,
-} from "lucide-react";
+import { BadgeCheck, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/site/page-hero";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, GlowBlob, Section } from "@/components/ui/layout";
@@ -25,11 +19,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/cursos" },
 };
 
-const BADGE_ICONS = {
-  practice: Waves,
-  certificate: Award,
-  jobs: BriefcaseBusiness,
-} as const;
+/** Insignias del programa, con los PNG del disenador. */
+const BADGE_ICONS: Record<string, string> = {
+  practice: "insignia-practica",
+  certificate: "insignia-certificacion",
+  jobs: "insignia-salidas",
+};
 
 export default async function CursosPage() {
   const [course, settings] = await Promise.all([
@@ -83,7 +78,8 @@ export default async function CursosPage() {
         titleLead="NUESTROS"
         titleAccent="CURSOS"
         subtitle="Formación profesional en ingeniería de sonido"
-        imageKey="hero-cursos"
+        imageKey="fondo-matriculate"
+        variant="tenue"
       />
 
       {/* Presentacion del programa */}
@@ -91,7 +87,7 @@ export default async function CursosPage() {
         <GlowBlob
           className="left-1/2 top-0 -translate-x-1/2 opacity-50"
           size={560}
-          color="rgba(255,107,0,0.26)"
+          color="rgba(235,93,26,0.26)"
         />
 
         <Container className="relative text-center">
@@ -122,15 +118,25 @@ export default async function CursosPage() {
           {/* Insignias */}
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {course.badges.map((badge) => {
-              const Icon = BADGE_ICONS[badge.icon] ?? BadgeCheck;
+              const iconKey = BADGE_ICONS[badge.icon];
               return (
                 <RevealItem key={badge.title}>
                   <div className="flex h-full items-center gap-4 rounded-card border border-hairline bg-ink-900/60 p-5 text-left">
                     <span
                       aria-hidden
-                      className="grid size-11 shrink-0 place-items-center rounded-2xl bg-gradient-brand text-white"
+                      className="grid size-11 shrink-0 place-items-center rounded-2xl bg-gradient-brand p-2 text-white"
                     >
-                      <Icon className="size-5" />
+                      {iconKey ? (
+                        <MediaImage
+                          mediaKey={iconKey}
+                          alt=""
+                          fill={false}
+                          width={28}
+                          height={28}
+                          sizes="28px"
+                          className="size-7 object-contain brightness-0 invert"
+                        />
+                      ) : null}
                     </span>
                     <span>
                       <span className="block font-display text-[12px] font-extrabold uppercase tracking-wide text-white">
@@ -149,7 +155,7 @@ export default async function CursosPage() {
           <Reveal delay={0.1} className="relative mt-10">
             <div className="relative mx-auto aspect-16/9 max-w-3xl overflow-hidden rounded-card-lg border border-hairline">
               <MediaImage
-                mediaKey="course-studio"
+                mediaKey="home-nosotros"
                 sizes="(max-width: 1024px) 92vw, 48rem"
                 className="object-cover"
               />
@@ -271,7 +277,7 @@ export default async function CursosPage() {
             <Reveal delay={0.1} className="relative">
               <div className="relative h-full min-h-[20rem] overflow-hidden rounded-card-lg border border-hairline">
                 <MediaImage
-                  mediaKey="academy-photo"
+                  mediaKey="nosotros-imagenes"
                   sizes="(max-width: 1024px) 92vw, 50vw"
                   className="object-cover"
                 />
@@ -317,7 +323,7 @@ export default async function CursosPage() {
       {/* Perfil del egresado + tendencias */}
       <Section className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <MediaImage mediaKey="faq-photo" sizes="100vw" className="object-cover" />
+          <MediaImage mediaKey="home-preguntas" sizes="100vw" className="object-cover" />
           <span
             aria-hidden
             className="absolute inset-0 bg-ink-950/90"
@@ -383,7 +389,7 @@ export default async function CursosPage() {
             <Reveal className="relative">
               <div className="relative aspect-4/5 overflow-hidden rounded-card-lg border border-hairline lg:sticky lg:top-28">
                 <MediaImage
-                  mediaKey="course-classroom"
+                  mediaKey="fondo-matriculate"
                   sizes="(max-width: 1024px) 92vw, 44vw"
                   className="object-cover"
                 />

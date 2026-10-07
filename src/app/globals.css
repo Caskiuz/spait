@@ -2,16 +2,17 @@
 
 /* ==========================================================================
    Sound Tech Peru — Design tokens
-   Extraidos de las capturas de referencia del cliente (docs/referencias).
-   Tema oscuro calido con acento naranja y glows ambares.
+   Tipografia, color y superficies tomados del material original del cliente
+   (logo vectorial, familia BR Firma y piezas de diseno).
    ========================================================================== */
 
 @theme {
   /* --- Tipografia ------------------------------------------------------ */
-  --font-display: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui,
-    sans-serif;
-  --font-sans: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui,
-    -apple-system, "Segoe UI", sans-serif;
+  /* BR Firma, la familia que usa el disenador. Black para los titulares de
+     banner, Regular para los textos. Cargada en src/app/layout.tsx. */
+  --font-display: var(--font-br-firma), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-br-firma), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
 
   /* --- Superficies (negro calido) -------------------------------------- */
   --color-ink-950: #08080a;
@@ -25,12 +26,15 @@
   --color-ink-500: #4a4a53;
 
   /* --- Acento naranja -------------------------------------------------- */
-  --color-brand-300: #ffc38a;
-  --color-brand-400: #ffa245;
-  --color-brand-500: #ff8a1a;
-  --color-brand-600: #ff6b00;
-  --color-brand-700: #e85c00;
-  --color-brand-800: #bf4900;
+  /* Muestreado del logo original: el naranja de marca es #EB5D1A, presente
+     en el 86 % de los pixeles opacos de public/media/logo-soundtech.png.
+     Los tonos vecinos se derivan de el. */
+  --color-brand-300: #ffb088;
+  --color-brand-400: #ff8a4f;
+  --color-brand-500: #f76c2a;
+  --color-brand-600: #eb5d1a;
+  --color-brand-700: #c94a12;
+  --color-brand-800: #9e3a0e;
 
   /* --- Neutros de texto ------------------------------------------------ */
   --color-fog-100: #f5f5f6;
@@ -50,8 +54,8 @@
   --radius-pill: 999px;
 
   /* --- Sombras y glows ------------------------------------------------- */
-  --shadow-glow-sm: 0 0 24px -6px rgba(255, 107, 0, 0.45);
-  --shadow-glow: 0 0 48px -10px rgba(255, 107, 0, 0.55);
+  --shadow-glow-sm: 0 0 24px -6px rgba(235,93,26, 0.45);
+  --shadow-glow: 0 0 48px -10px rgba(235,93,26, 0.55);
   --shadow-card: 0 18px 44px -22px rgba(0, 0, 0, 0.95);
   --shadow-lift: 0 24px 60px -26px rgba(0, 0, 0, 1);
 

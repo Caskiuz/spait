@@ -35,7 +35,8 @@ export default async function ClientesPage() {
         titleLead="NUESTROS"
         titleAccent="CLIENTES"
         subtitle="Empresas que confían en nosotros"
-        imageKey="hero-clientes"
+        imageKey="fondo-clientes"
+        variant="tenue"
       />
 
       {/* Cifras */}
@@ -63,7 +64,7 @@ export default async function ClientesPage() {
         <GlowBlob
           className="left-1/2 top-0 -translate-x-1/2 opacity-45"
           size={520}
-          color="rgba(255,107,0,0.24)"
+          color="rgba(235,93,26,0.24)"
         />
 
         <Container className="relative">
@@ -152,7 +153,7 @@ export default async function ClientesPage() {
         subtitle="Cuéntanos qué necesitas y armamos una propuesta para tu institución."
         buttonLabel="Solicitar información"
         buttonHref="/cotizar"
-        imageKey="hero-clientes"
+        imageKey="fondo-clientes"
       />
     </>
   );

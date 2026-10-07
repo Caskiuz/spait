@@ -1,20 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteSettings } from "@/content";
 import "./globals.css";
 
 /**
- * Tipografia del diseno: Montserrat en todos sus pesos.
- * Los titulares usan 700-900 en mayusculas; el cuerpo, 300-400.
+ * BR Firma, la tipografía del diseñador.
+ *
+ * Los .woff2 se generaron desde los .ttf que envió el cliente: 200 KB los seis
+ * pesos frente a los 525 KB de los originales.
+ *
+ * Según sus indicaciones: Black para los titulares de banner y Regular para
+ * los textos pequeños.
  */
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-montserrat",
+const brFirma = localFont({
+  src: [
+    { path: "../fonts/BRFirma-Light.woff2", weight: "300", style: "normal" },
+    { path: "../fonts/BRFirma-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/BRFirma-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/BRFirma-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../fonts/BRFirma-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/BRFirma-Black.woff2", weight: "900", style: "normal" },
+  ],
+  variable: "--font-br-firma",
   display: "swap",
   fallback: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -70,7 +82,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es-PE" className={montserrat.variable}>
+    <html lang="es-PE" className={brFirma.variable}>
       <body className="min-h-dvh bg-ink-950 antialiased">
         {/* Enlace de salto: primera parada del teclado para accesibilidad */}
         <a

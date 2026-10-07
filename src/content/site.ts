@@ -1,17 +1,21 @@
 import type { ClientContent, CourseContent, FaqContent, PageHeroContent, SiteSettingsContent, SocialLinkContent } from "./types";
 
 /* ==========================================================================
-   Configuracion general del sitio (datos extraidos de las capturas)
+   Configuracion general del sitio
+   Los datos de contacto son los del PDF de informacion que envio el cliente,
+   que es el material mas reciente y sustituye a los de las capturas.
    ========================================================================== */
 
 export const siteSettings: SiteSettingsContent = {
   companyName: "Sound Tech Perú",
   legalName: "Sound Tech Perú",
   tagline: "Tecnología que conecta personas",
-  phone: "+51961927974",
-  phoneDisplay: "+51 961 927 974",
-  whatsapp: "51961927974",
+  contactName: "Andrea Rodríguez",
+  phone: "+51964687451",
+  phoneDisplay: "+51 964 687 451",
+  whatsapp: "51964687451",
   email: "soundtechperu@gmail.com",
+  website: "www.soundtechperu.com.pe",
   address: "Lima, Perú",
   hours: "Lun a Sáb · 9:00 a 19:00",
   yearsOfExperience: 10,
@@ -24,13 +28,13 @@ export const siteSettings: SiteSettingsContent = {
   siteUrl: "http://localhost:3000",
   seoTitleTemplate: "%s | Sound Tech Perú",
   seoDescription:
-    "Soluciones profesionales de audio e integración tecnológica. Audio profesional, acústica, conferencia y votación, control integrado, iluminación, videoproyección, CCTV y cableado estructurado. Formación de ingenieros de sonido en Perú.",
+    "Soluciones profesionales de audio e integración tecnológica. Audio profesional, acústica, conferencia y votación, control integrado, iluminación, videoproyección, CCTV y cableado estructurado. Capacitación técnica en ingeniería de sonido en Perú.",
 };
 
 /* ==========================================================================
    Redes sociales
-   Nota: en las capturas de referencia los tres accesos apuntan a la misma
-   URL de Facebook. El administrador puede reemplazarlas desde /admin.
+   Las tres que aparecen en el diseno y cuyos iconos envio el disenador.
+   Pendiente: confirmar las URLs reales de cada perfil.
    ========================================================================== */
 
 export const socialLinks: SocialLinkContent[] = [
@@ -41,14 +45,7 @@ export const socialLinks: SocialLinkContent[] = [
     isFeatured: true,
     showInFooter: true,
     order: 1,
-  },
-  {
-    platform: "whatsapp",
-    label: "WhatsApp",
-    url: "https://wa.me/51961927974",
-    isFeatured: true,
-    showInFooter: false,
-    order: 2,
+    note: "Pendiente: confirmar la URL exacta de la página.",
   },
   {
     platform: "instagram",
@@ -56,34 +53,17 @@ export const socialLinks: SocialLinkContent[] = [
     url: "https://www.instagram.com/soundtechperu",
     isFeatured: true,
     showInFooter: true,
+    order: 2,
+    note: "Pendiente: confirmar la URL exacta del perfil.",
+  },
+  {
+    platform: "tiktok",
+    label: "TikTok",
+    url: "https://www.tiktok.com/@soundtechperu",
+    isFeatured: true,
+    showInFooter: true,
     order: 3,
-  },
-  {
-    platform: "discord",
-    label: "Discord",
-    url: "https://www.facebook.com/soundtechperu",
-    isFeatured: false,
-    showInFooter: false,
-    order: 4,
-    note: "Pendiente: reemplazar por la invitación real de Discord.",
-  },
-  {
-    platform: "x",
-    label: "X",
-    url: "https://x.com/soundtechperu",
-    isFeatured: false,
-    showInFooter: true,
-    order: 5,
-    note: "Pendiente: confirmar usuario de X (Twitter).",
-  },
-  {
-    platform: "pinterest",
-    label: "Pinterest",
-    url: "https://www.pinterest.com/soundtechperu",
-    isFeatured: false,
-    showInFooter: true,
-    order: 6,
-    note: "Pendiente: confirmar perfil de Pinterest.",
+    note: "Pendiente: confirmar la URL exacta del perfil.",
   },
 ];
 
@@ -109,15 +89,15 @@ export const footerNav = [
 ] as const;
 
 /* ==========================================================================
-   Clientes destacados
+   Clientes: los siete del PDF de informacion del cliente
    ========================================================================== */
 
 export const clients: ClientContent[] = [
   {
-    name: "Colegio Carmelines",
-    shortName: "Colegio Carmelines",
+    name: "Colegio Carmelitas",
+    shortName: "Colegio Carmelitas",
     category: "Educación",
-    logoKey: "client-carmelines",
+    logoKey: "cliente-carmelitas",
     order: 1,
     isVisible: true,
   },
@@ -125,24 +105,48 @@ export const clients: ClientContent[] = [
     name: "Colegio San Francisco de Borja",
     shortName: "Colegio San Francisco de Borja",
     category: "Educación",
-    logoKey: "client-san-francisco-de-borja",
+    logoKey: "cliente-san-francisco-de-borja",
     order: 2,
     isVisible: true,
   },
   {
     name: "Colegio Nuestra Señora del Consuelo",
-    shortName: "Colegio Nuestra Sra. Del Consuelo",
+    shortName: "Colegio Nuestra Sra. del Consuelo",
     category: "Educación",
-    logoKey: "client-nuestra-senora-del-consuelo",
+    logoKey: "cliente-nuestra-senora-del-consuelo",
     order: 3,
     isVisible: true,
   },
   {
-    name: "Colegio Reino del Mundo",
-    shortName: "Colegio Reino del Mundo",
+    name: "Colegio Reina del Mundo",
+    shortName: "Colegio Reina del Mundo",
     category: "Educación",
-    logoKey: "client-reino-del-mundo",
+    logoKey: "cliente-reina-del-mundo",
     order: 4,
+    isVisible: true,
+  },
+  {
+    name: "Colegio Madres Dominicas Santa Anita",
+    shortName: "Colegio Madres Dominicas Sta. Anita",
+    category: "Educación",
+    logoKey: "cliente-santa-anita",
+    order: 5,
+    isVisible: true,
+  },
+  {
+    name: "Instituto Superior Iset Juan 23",
+    shortName: "Instituto Superior Iset Juan 23",
+    category: "Educación superior",
+    logoKey: "cliente-iset-juan-23",
+    order: 6,
+    isVisible: true,
+  },
+  {
+    name: "Universidad de Lima",
+    shortName: "Universidad de Lima",
+    category: "Educación superior",
+    logoKey: "cliente-universidad-de-lima",
+    order: 7,
     isVisible: true,
   },
 ];
@@ -189,8 +193,8 @@ export const faqs: FaqContent[] = [
 export const course: CourseContent = {
   slug: "ingenieria-de-sonido",
   title: "Ingeniería de Sonido",
-  headline: "FORMAMOS",
-  headlineAccent: "INGENIEROS DE SONIDO PARA UN MUNDO QUE SUENA",
+  headline: "CAPACITACIÓN TÉCNICA",
+  headlineAccent: "EN INGENIERÍA DE SONIDO",
   subtitle:
     "Educación técnica profesional con estándares internacionales y enfoque práctico.",
   duration: "1 año (4 módulos)",
@@ -221,7 +225,7 @@ export const course: CourseContent = {
     {
       title: "Docentes profesionales",
       description:
-        "Formación en sonido en actividad, con experiencia real en la industria.",
+        "Profesionales en actividad con experiencia real en la industria del sonido.",
     },
     {
       title: "Enfoque 100% práctico",
@@ -435,7 +439,7 @@ export const homeContent = {
   },
   academy: {
     eyebrow: "FORMACIÓN DE",
-    titleLead: "INGENIEROS DE",
+    titleLead: "INGENIERÍA DE",
     titleAccent: "SONIDO",
     body: "Educación técnica profesional con estándares internacionales y enfoque práctico. Contamos con un programa profesional de un año de duración, conformado por 4 módulos de 3 meses cada uno, con certificación en cada módulo pedagógico.",
     cta: { label: "Ver más", href: "/cursos" },
@@ -468,7 +472,7 @@ export const homeContent = {
   },
   enrollBanner: {
     eyebrow: "FORMACIÓN DE",
-    titleLead: "INGENIEROS DE",
+    titleLead: "INGENIERÍA DE",
     titleAccent: "SONIDO",
     body: "Educación técnica profesional con estándares internacionales y enfoque práctico: estudia con nosotros y sé parte de un equipo profesional.",
     cardTitle: "Matricúlate",

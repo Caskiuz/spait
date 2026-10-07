@@ -4,10 +4,15 @@ import { MediaImage } from "./media-image";
 import { cn } from "@/lib/utils";
 
 /**
- * Encabezado de las paginas internas.
+ * Encabezado de las páginas internas.
  *
- * Reproduce el patron de las capturas: fotografia a sangre con velo oscuro,
- * titular centrado muy pesado, subtitulo y linea naranja de separacion.
+ * Reproduce el patrón de las capturas: fotografía con velo oscuro, titular
+ * centrado muy pesado, subtítulo y línea naranja de separación.
+ *
+ * Dos variantes, según indicación del diseñador:
+ *  - `foto`  la imagen llena el banner (portadas de sección).
+ *  - `tenue` la imagen se muestra al 70 % sobre el fondo negro, que es como
+ *            compone los banners de las fichas de servicio internas.
  */
 export function PageHero({
   titleLead,
@@ -16,6 +21,7 @@ export function PageHero({
   imageKey,
   priority = true,
   showScrollCue = true,
+  variant = "foto",
   className,
 }: {
   titleLead: string;
@@ -24,8 +30,11 @@ export function PageHero({
   imageKey: string;
   priority?: boolean;
   showScrollCue?: boolean;
+  variant?: "foto" | "tenue";
   className?: string;
 }) {
+  const tenue = variant === "tenue";
+
   return (
     <section
       className={cn(
@@ -33,19 +42,28 @@ export function PageHero({
         className,
       )}
     >
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-ink-950">
         <MediaImage
           mediaKey={imageKey}
           priority={priority}
           sizes="100vw"
-          className="scale-105 object-cover"
+          className={cn(
+            "object-cover",
+            tenue ? "opacity-70" : "scale-105",
+          )}
         />
       </div>
 
-      {/* Velo: oscurece arriba para la navbar y abajo para el contenido */}
+      {/* Velo: oscurece arriba para la navbar y abajo para el contenido.
+          En la variante tenue es más ligero, porque la imagen ya va al 70 %. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-ink-950/92 via-ink-950/72 to-ink-950"
+        className={cn(
+          "absolute inset-0 bg-gradient-to-b to-ink-950",
+          tenue
+            ? "from-ink-950/85 via-ink-950/40"
+            : "from-ink-950/92 via-ink-950/72",
+        )}
       />
       <Grain />
 

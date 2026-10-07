@@ -36,7 +36,7 @@ export default function ProyectosPage() {
         <GlowBlob
           className="-left-32 top-8 opacity-40"
           size={480}
-          color="rgba(255,107,0,0.22)"
+          color="rgba(235,93,26,0.22)"
         />
 
         <Container className="relative">

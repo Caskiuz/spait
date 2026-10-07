@@ -47,6 +47,8 @@ export interface ServiceSolutionContent {
   /** Numero visible: 01 - 04 */
   number: string;
   title: string;
+  /** Los PDFs del cliente describen cada solucion en una frase. */
+  description?: string;
 }
 
 export interface SolutionCardContent {
@@ -64,6 +66,8 @@ export interface ServiceApplicationContent {
   side: ApplicationSide;
   /** Se muestra resaltado dentro del grid de aplicaciones */
   emphasized?: boolean;
+  /** Numero correlativo cuando el bloque los numera (01, 02…). */
+  number?: string;
 }
 
 export interface ServiceScopeGroupContent {
@@ -85,6 +89,11 @@ export interface ServiceContent {
   /** Parte del titulo que se pinta en blanco */
   titleLead: string;
   order: number;
+  /**
+   * Posicion en la rejilla de areas de /nosotros. En el diseno ese orden es
+   * distinto al de la lista de /servicios, por eso se guarda aparte.
+   */
+  areaOrder: number;
   isFeatured: boolean;
   /** Etiqueta corta para el grid de "areas" en /nosotros */
   areaLabel: string;
@@ -169,6 +178,8 @@ export interface ClientContent {
   shortName: string;
   category: string;
   logoKey: string;
+  /** Si se indica, el logo del carrusel enlaza al sitio del cliente. */
+  websiteUrl?: string;
   order: number;
   isVisible: boolean;
 }
@@ -194,10 +205,14 @@ export interface SiteSettingsContent {
   companyName: string;
   legalName: string;
   tagline: string;
+  /** Persona de contacto que figura en el material del cliente. */
+  contactName: string;
   phone: string;
   phoneDisplay: string;
   whatsapp: string;
   email: string;
+  /** Dominio publico indicado por el cliente (sin protocolo). */
+  website: string;
   address: string;
   hours: string;
   yearsOfExperience: number;

@@ -1,17 +1,21 @@
-"use client";
-
-import { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Container, Section } from "@/components/ui/layout";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { MediaImage } from "@/components/site/media-image";
-import { cn } from "@/lib/utils";
 import type { ClientContent } from "@/content/types";
 
 /**
- * Carrusel de clientes con flechas y puntos, igual que en las capturas.
- * Con pocos elementos las flechas se ocultan y la fila se centra.
+ * Carrusel continuo de clientes.
+ *
+ * El diseñador pidió sustituir las dos filas del diseño por una sola que corra
+ * sola, con los logos enlazados.
+ *
+ * Se resuelve con una animación CSS y no con JavaScript: es más fluido, no
+ * bloquea el hilo principal y funciona aunque el JavaScript no haya cargado.
+ * La lista se duplica para que el bucle no tenga salto, y esa copia queda
+ * oculta a los lectores de pantalla.
+ *
+ * Se detiene al pasar el cursor o al enfocar con el teclado, y con
+ * `prefers-reduced-motion` se muestra como una fila que se puede desplazar.
  */
 export function ClientsCarousel({
   clients,
@@ -28,147 +32,94 @@ export function ClientsCarousel({
   subtitle?: string;
   tone?: "base" | "raised" | "sunken";
 }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    loop: clients.length > 4,
-    slidesToScroll: 1,
-  });
-
-  const [selected, setSelected] = useState(0);
-  const [snaps, setSnaps] = useState<number[]>([]);
-  const [canScroll, setCanScroll] = useState(false);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelected(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    setSnaps(emblaApi.scrollSnapList());
-    setCanScroll(emblaApi.canScrollNext() || emblaApi.canScrollPrev());
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", () => {
-      setSnaps(emblaApi.scrollSnapList());
-      setCanScroll(emblaApi.canScrollNext() || emblaApi.canScrollPrev());
-      onSelect();
-    });
-    return () => {
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi, onSelect]);
-
   if (!clients.length) return null;
 
   return (
     <Section tone={tone} className="overflow-hidden">
       <Container>
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          {eyebrow || titleLead ? (
-            <SectionHeading
-              eyebrow={eyebrow}
-              titleLead={titleLead}
-              titleAccent={titleAccent}
-              subtitle={subtitle}
-            />
-          ) : (
-            <span />
-          )}
-
-          {canScroll ? (
-            <div className="flex shrink-0 gap-2.5">
-              <CarouselButton
-                label="Clientes anteriores"
-                onClick={() => emblaApi?.scrollPrev()}
-              >
-                <ChevronLeft className="size-5" />
-              </CarouselButton>
-              <CarouselButton
-                label="Clientes siguientes"
-                onClick={() => emblaApi?.scrollNext()}
-              >
-                <ChevronRight className="size-5" />
-              </CarouselButton>
-            </div>
-          ) : null}
-        </div>
-
-        <div className="mt-10 overflow-hidden" ref={emblaRef}>
-          <ul className="flex gap-5">
-            {clients.map((client) => (
-              <li
-                key={client.name}
-                className="min-w-0 shrink-0 grow-0 basis-[78%] sm:basis-[46%] lg:basis-[calc((100%-3.75rem)/4)]"
-              >
-                <article className="group flex h-full flex-col items-center gap-4 rounded-card border border-hairline bg-ink-900/70 p-6 text-center transition-all duration-300 hover:border-brand-600/45 hover:bg-ink-850">
-                  <div className="relative grid h-24 w-full place-items-center">
-                    <MediaImage
-                      mediaKey={client.logoKey}
-                      fallbackAlt={client.name}
-                      fill={false}
-                      width={96}
-                      height={110}
-                      sizes="96px"
-                      className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-
-                  <h3 className="font-display text-[13px] font-extrabold uppercase leading-tight tracking-wide">
-                    <span className="block text-white">
-                      {client.shortName.split(" ").slice(0, 1).join(" ")}
-                    </span>
-                    <span className="block text-gradient-brand">
-                      {client.shortName.split(" ").slice(1).join(" ")}
-                    </span>
-                  </h3>
-                </article>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {snaps.length > 1 ? (
-          <div className="mt-8 flex justify-center gap-2">
-            {snaps.map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => emblaApi?.scrollTo(index)}
-                aria-label={`Ir al grupo de clientes ${index + 1}`}
-                aria-current={index === selected ? "true" : undefined}
-                className={cn(
-                  "size-1.5 rounded-full transition-all duration-300",
-                  index === selected
-                    ? "w-6 bg-brand-600"
-                    : "bg-fog-600 hover:bg-fog-500",
-                )}
-              />
-            ))}
-          </div>
+        {eyebrow || titleLead ? (
+          <SectionHeading
+            eyebrow={eyebrow}
+            titleLead={titleLead}
+            titleAccent={titleAccent}
+            subtitle={subtitle}
+          />
         ) : null}
       </Container>
+
+      {/* La marquesina ocupa todo el ancho, sin el acolchado del contenedor */}
+      <div
+        className="group/marquee relative mt-12"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+        }}
+      >
+        <ul
+          aria-label="Clientes que confían en nosotros"
+          className="no-scrollbar flex w-max animate-marquee gap-5 px-5 group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused] motion-reduce:w-full motion-reduce:animate-none motion-reduce:overflow-x-auto motion-reduce:px-5"
+        >
+          {[...clients, ...clients].map((client, index) => {
+            // La segunda mitad es la copia que cierra el bucle.
+            const esCopia = index >= clients.length;
+            return (
+              <li
+                key={`${client.name}-${index}`}
+                aria-hidden={esCopia || undefined}
+                // Con movimiento reducido no hay bucle, así que la copia sobra.
+                className={esCopia ? "shrink-0 motion-reduce:hidden" : "shrink-0"}
+              >
+                <ClientCard client={client} />
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </Section>
   );
 }
 
-function CarouselButton({
-  label,
-  onClick,
-  children,
-}: {
-  label: string;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={label}
-      className="grid size-11 place-items-center rounded-full border border-hairline-strong text-fog-200 transition-all hover:border-brand-600/70 hover:text-brand-400"
+function ClientCard({ client }: { client: ClientContent }) {
+  const contenido = (
+    <>
+      <div className="relative grid h-24 w-full place-items-center">
+        <MediaImage
+          mediaKey={client.logoKey}
+          fallbackAlt={client.name}
+          fill={false}
+          width={96}
+          height={110}
+          sizes="96px"
+          className="h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+
+      <h3 className="font-display text-[12px] font-black uppercase leading-tight tracking-wide">
+        <span className="block text-white">
+          {client.shortName.split(" ").slice(0, 1).join(" ")}
+        </span>
+        <span className="text-gradient-brand block">
+          {client.shortName.split(" ").slice(1).join(" ")}
+        </span>
+      </h3>
+    </>
+  );
+
+  const clases =
+    "group flex w-52 flex-col items-center gap-4 rounded-card border border-hairline bg-ink-900/70 p-6 text-center transition-all duration-300 hover:border-brand-600/45 hover:bg-ink-850";
+
+  return client.websiteUrl ? (
+    <a
+      href={client.websiteUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={clases}
     >
-      {children}
-    </button>
+      {contenido}
+    </a>
+  ) : (
+    <article className={clases}>{contenido}</article>
   );
 }

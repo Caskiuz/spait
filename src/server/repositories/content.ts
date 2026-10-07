@@ -151,6 +151,7 @@ function mapService(row: ServiceRow): ServiceContent {
     titleLead: row.titleLead,
     titleAccent: row.titleAccent,
     order: row.order,
+    areaOrder: row.areaOrder,
     isFeatured: row.isFeatured,
     areaLabel: row.areaLabel,
     areaDescription: row.areaDescription,
@@ -163,7 +164,11 @@ function mapService(row: ServiceRow): ServiceContent {
     solutionsEyebrow: row.solutionsEyebrow ?? undefined,
     solutionsTitle: row.solutionsTitle,
     solutionsSubtitle: row.solutionsSubtitle ?? undefined,
-    solutions: row.solutions.map((s) => ({ number: s.number, title: s.title })),
+    solutions: row.solutions.map((s) => ({
+      number: s.number,
+      title: s.title,
+      description: s.description ?? undefined,
+    })),
     solutionCard: row.solutionCard
       ? {
           title: row.solutionCard.title,
@@ -184,6 +189,7 @@ function mapService(row: ServiceRow): ServiceContent {
       ? row.applications.map((a) => ({
           title: a.title,
           description: a.description,
+          number: a.number ?? undefined,
           side: a.side,
           emphasized: a.emphasized,
         }))

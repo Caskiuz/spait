@@ -191,6 +191,9 @@ model Service {
   titleLead      String
   titleAccent    String
   order          Int      @default(0)
+  /// Posicion en la rejilla de areas de /nosotros, que en el diseno sigue un
+  /// orden distinto al de la lista de /servicios.
+  areaOrder      Int      @default(0)
   isFeatured     Boolean  @default(true)
   isPublished    Boolean  @default(true)
   areaLabel      String
@@ -257,12 +260,14 @@ model ServiceImage {
 }
 
 model ServiceSolution {
-  id        String  @id @default(cuid())
-  serviceId String
+  id          String  @id @default(cuid())
+  serviceId   String
   service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-  number    String
-  title     String
-  order     Int     @default(0)
+  number      String
+  title       String
+  /// Los PDFs del cliente describen cada solucion en una frase.
+  description String?
+  order       Int     @default(0)
 
   @@index([serviceId, order])
 }
@@ -285,6 +290,8 @@ model ServiceApplication {
   serviceId   String
   service     Service         @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   title       String
+  /// Numero visible cuando el bloque numera sus tarjetas (01, 02...).
+  number      String?
   description String
   side        ApplicationSide @default(IZQUIERDA)
   emphasized  Boolean         @default(false)

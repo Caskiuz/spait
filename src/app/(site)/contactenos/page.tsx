@@ -33,7 +33,8 @@ export default async function ContactenosPage() {
         titleLead="CONTÁCTE"
         titleAccent="NOS"
         subtitle="Hablemos de tu próximo proyecto"
-        imageKey="hero-contacto"
+        imageKey="deco-disco"
+        variant="tenue"
       />
 
       <SocialsSection
@@ -49,7 +50,7 @@ export default async function ContactenosPage() {
       <Section tone="raised" className="relative overflow-hidden">
         <div className="absolute inset-0">
           <MediaImage
-            mediaKey="socials-photo"
+            mediaKey="fondo-clientes"
             sizes="100vw"
             className="object-cover opacity-70"
           />
@@ -85,7 +86,7 @@ export default async function ContactenosPage() {
             <div className="relative hidden lg:block">
               <div className="relative aspect-4/5 overflow-hidden rounded-card-lg border border-hairline">
                 <MediaImage
-                  mediaKey="hero-contacto"
+                  mediaKey="home-nosotros"
                   sizes="50vw"
                   className="object-cover"
                 />

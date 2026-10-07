@@ -42,7 +42,7 @@ export function HomeHero({
       <GlowBlob
         className="-left-40 top-1/4 opacity-60"
         size={560}
-        color="rgba(255,107,0,0.34)"
+        color="rgba(235,93,26,0.34)"
       />
       <Grain />
 

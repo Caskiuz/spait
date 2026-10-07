@@ -42,7 +42,7 @@ export function FaqSection({
       <GlowBlob
         className="-left-40 top-10 opacity-40"
         size={480}
-        color="rgba(255,107,0,0.24)"
+        color="rgba(235,93,26,0.24)"
       />
 
       <Container className="relative">

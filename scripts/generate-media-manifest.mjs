@@ -8,12 +8,27 @@
  * automaticamente, de modo que nunca hay rutas rotas.
  */
 
-import { readdir, writeFile } from "node:fs/promises";
+import { readdir, writeFile, readFile } from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const MEDIA_DIR = path.join(ROOT, "public", "media");
 const OUT = path.join(ROOT, "src", "content", "media.ts");
+
+/**
+ * Textos alternativos de los recursos reales del cliente.
+ *
+ * Los escribe scripts/import-client-assets.mjs y tienen prioridad sobre el
+ * mapa de marcadores de posicion de mas abajo.
+ */
+let ALT_IMPORTADOS = {};
+try {
+  ALT_IMPORTADOS = JSON.parse(
+    await readFile(path.join(MEDIA_DIR, "alt-textos.json"), "utf8"),
+  );
+} catch {
+  // Todavia no se han importado los recursos del cliente.
+}
 
 /** Texto alternativo por clave: obligatorio para accesibilidad. */
 const ALT = {
@@ -53,6 +68,8 @@ const ALT = {
   "socials-photo": "Ambiente de estudio de audio",
 
   "logo-soundtech": "Logotipo de Sound Tech Perú",
+  "hero-video-poster": "Consola de mezcla en penumbra",
+  "hero-video": "Vídeo de fondo con equipos de audio",
 };
 
 /** Logos de clientes: se generan como emblemas SVG, no se descargan. */
@@ -83,7 +100,7 @@ async function main() {
 
   const missingAlt = entries
     .map(([k]) => k)
-    .filter((k) => !ALT[k] && !CLIENT_LOGOS[k]);
+    .filter((k) => !ALT[k] && !CLIENT_LOGOS[k] && !(k in ALT_IMPORTADOS));
   if (missingAlt.length) {
     console.warn(
       `Aviso: ${missingAlt.length} imagenes sin texto alternativo: ${missingAlt.join(", ")}`,
@@ -92,7 +109,8 @@ async function main() {
 
   const body = entries
     .map(([key, ext]) => {
-      const alt = ALT[key] ?? CLIENT_LOGOS[key] ?? key;
+      const alt =
+        ALT_IMPORTADOS[key] ?? ALT[key] ?? CLIENT_LOGOS[key] ?? key;
       return `  "${key}": { key: "${key}", url: "/media/${key}${ext}", alt: ${JSON.stringify(alt)} },`;
     })
     .join("\n");

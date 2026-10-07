@@ -44,7 +44,7 @@ export default async function RedesSocialesPage() {
         <GlowBlob
           className="-right-32 top-0 opacity-40"
           size={480}
-          color="rgba(255,107,0,0.22)"
+          color="rgba(235,93,26,0.22)"
         />
 
         <Container className="relative">

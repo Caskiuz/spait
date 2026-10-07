@@ -14,7 +14,7 @@ export function AboutSplit({
   titleAccent,
   body,
   cta,
-  imageKeys,
+  imageKey,
   decorativeKey,
 }: {
   eyebrow: string;
@@ -22,7 +22,8 @@ export function AboutSplit({
   titleAccent: string;
   body: string;
   cta: { label: string; href: string };
-  imageKeys: [string, string];
+  /** Imagen que el diseñador ya envió montada para esta sección. */
+  imageKey: string;
   decorativeKey: string;
 }) {
   return (
@@ -30,7 +31,7 @@ export function AboutSplit({
       <GlowBlob
         className="-right-32 top-0 opacity-50"
         size={480}
-        color="rgba(255,107,0,0.26)"
+        color="rgba(235,93,26,0.26)"
       />
 
       <Container className="relative">
@@ -72,23 +73,14 @@ export function AboutSplit({
         </div>
 
         <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          {/* Fotografias */}
+          {/* Fotografia: el disenador la envio ya compuesta */}
           <Reveal className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="relative aspect-4/3 overflow-hidden rounded-card">
-                <MediaImage
-                  mediaKey={imageKeys[0]}
-                  sizes="(max-width: 1024px) 45vw, 24vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-4/3 overflow-hidden rounded-card">
-                <MediaImage
-                  mediaKey={imageKeys[1]}
-                  sizes="(max-width: 1024px) 45vw, 24vw"
-                  className="object-cover"
-                />
-              </div>
+            <div className="relative aspect-16/9 overflow-hidden rounded-card">
+              <MediaImage
+                mediaKey={imageKey}
+                sizes="(max-width: 1024px) 92vw, 46vw"
+                className="object-cover"
+              />
             </div>
 
             <DotPattern className="-bottom-4 -left-6 size-24 opacity-40" />

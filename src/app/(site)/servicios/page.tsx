@@ -37,7 +37,7 @@ export default async function ServiciosPage() {
         <GlowBlob
           className="-left-32 top-0 opacity-40"
           size={460}
-          color="rgba(255,107,0,0.22)"
+          color="rgba(235,93,26,0.22)"
         />
 
         <Container className="relative">

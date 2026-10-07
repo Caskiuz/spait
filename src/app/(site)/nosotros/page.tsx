@@ -1,25 +1,14 @@
 import type { Metadata } from "next";
-import {
-  Camera,
-  Cable,
-  Lightbulb,
-  Mic,
-  Monitor,
-  Network,
-  Radio,
-  ShieldCheck,
-  SlidersHorizontal,
-  Waves,
-} from "lucide-react";
+import { MediaImage } from "@/components/site/media-image";
 import { PageHero } from "@/components/site/page-hero";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, DotPattern, GlowBlob, Section } from "@/components/ui/layout";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
-import { MediaImage } from "@/components/site/media-image";
 import { AcademyBanner } from "@/components/site/sections/academy-banner";
 import { ClientsCarousel } from "@/components/site/sections/clients-carousel";
 import { homeContent, nosotrosContent } from "@/content";
-import { getClients, getServices } from "@/server/repositories/content";
+import { getClients } from "@/server/repositories/content";
+import { servicesByArea } from "@/content/services";
 import type { ServiceContent } from "@/content/types";
 
 export const revalidate = 300;
@@ -31,33 +20,41 @@ export const metadata: Metadata = {
   alternates: { canonical: "/nosotros" },
 };
 
-/** Icono por area de proyecto, en el mismo orden que las capturas. */
-const AREA_ICONS: Record<string, typeof Mic> = {
-  AUDIO: Mic,
-  ACÚSTICA: Waves,
-  "CONFERENCIA Y VOTACIÓN": SlidersHorizontal,
-  "CONTROL INTEGRADO": Monitor,
-  ILUMINACIÓN: Lightbulb,
-  SEGURIDAD: ShieldCheck,
-  VIDEO: Camera,
-  "CABLEADO ESTRUCTURADO": Cable,
-  TELECOMUNICACIÓN: Network,
+/**
+ * Icono de cada area, con los PNG que envio el disenador.
+ * La clave es el slug del servicio.
+ */
+const AREA_ICONS: Record<string, string> = {
+  "sistema-de-audio-profesional-y-comercial": "area-audio",
+  "acondicionamiento-y-aislamiento-acustico": "area-acustica",
+  "sistemas-de-conferencia-y-votacion": "area-conferencia",
+  "sistemas-de-control-integrado": "area-control",
+  "sistemas-de-iluminacion": "area-iluminacion",
+  "circuito-cerrado-de-television-cctv": "area-seguridad",
+  "sistemas-de-videoproyeccion-y-pantallas": "area-video",
+  "cableado-estructurado": "area-cableado",
+  "sistemas-de-teleconferencia": "area-telecomunicacion",
 };
 
 function ServiceAreaCard({ service }: { service: ServiceContent }) {
-  const Icon = AREA_ICONS[service.areaLabel] ?? Radio;
+  const iconKey = AREA_ICONS[service.slug];
 
   return (
     <div className="flex gap-3.5">
-      <span
-        aria-hidden
-        className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl border border-brand-600/35 bg-brand-600/10 text-brand-500"
-      >
-        <Icon className="size-4" />
-      </span>
+      {iconKey ? (
+        <MediaImage
+          mediaKey={iconKey}
+          alt=""
+          fill={false}
+          width={36}
+          height={36}
+          sizes="36px"
+          className="mt-0.5 size-9 shrink-0 object-contain"
+        />
+      ) : null}
 
       <div>
-        <h3 className="font-display text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand-500">
+        <h3 className="font-display text-[11px] font-black uppercase tracking-[0.14em] text-brand-500">
           {service.areaLabel}
         </h3>
         <p className="mt-1.5 text-xs leading-relaxed text-fog-400">
@@ -69,13 +66,17 @@ function ServiceAreaCard({ service }: { service: ServiceContent }) {
 }
 
 export default async function NosotrosPage() {
-  const [services, clients] = await Promise.all([getServices(), getClients()]);
+  // La rejilla de areas sigue el orden del diseno, que no coincide con el de
+  // la lista de /servicios: por eso se usa servicesByArea.
+  const [clients] = await Promise.all([getClients()]);
+  const services = servicesByArea;
 
+  // Imagenes que el disenador ya envio montadas para esta seccion.
   const galleryKeys = [
-    "hero-nosotros",
-    "hero-galeria",
-    "conferencia-1",
-    "iluminacion-1",
+    "nosotros-imagenes",
+    "nosotros-banner",
+    "home-nosotros",
+    "fondo-clientes",
   ];
 
   return (
@@ -84,7 +85,8 @@ export default async function NosotrosPage() {
         titleLead="SOBRE"
         titleAccent="NOSOTROS"
         subtitle="Conoce nuestra trayectoria"
-        imageKey="hero-nosotros"
+        imageKey="nosotros-banner"
+        variant="tenue"
       />
 
       {/* Division de proyectos */}
@@ -92,7 +94,7 @@ export default async function NosotrosPage() {
         <GlowBlob
           className="-right-36 top-6 opacity-45"
           size={500}
-          color="rgba(255,107,0,0.24)"
+          color="rgba(235,93,26,0.24)"
         />
 
         <Container className="relative">

@@ -26,7 +26,7 @@ export default async function AdminLoginPage({
       <GlowBlob
         className="left-1/2 top-1/3 -translate-x-1/2 opacity-50"
         size={620}
-        color="rgba(255,107,0,0.26)"
+        color="rgba(235,93,26,0.26)"
       />
 
       <Container className="relative max-w-md">

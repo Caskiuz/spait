@@ -70,14 +70,15 @@ export default async function CotizarPage({
         titleLead="COTIZA TU"
         titleAccent="PROYECTO"
         subtitle="Cuéntanos qué necesitas y te enviamos una propuesta"
-        imageKey="hero-cotizar"
+        imageKey="fondo-matriculate"
+        variant="tenue"
       />
 
       <Section className="overflow-hidden pt-14 md:pt-16">
         <GlowBlob
           className="-right-32 top-0 opacity-45"
           size={520}
-          color="rgba(255,107,0,0.24)"
+          color="rgba(235,93,26,0.24)"
         />
 
         <Container className="relative">

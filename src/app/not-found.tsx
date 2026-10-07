@@ -19,7 +19,7 @@ export default function NotFound() {
       <GlowBlob
         className="left-1/2 top-1/3 -translate-x-1/2 opacity-55"
         size={560}
-        color="rgba(255,107,0,0.28)"
+        color="rgba(235,93,26,0.28)"
       />
 
       <Container className="relative text-center">

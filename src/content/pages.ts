@@ -232,7 +232,7 @@ export const homeSections: HomeSectionContent[] = [
   { id: "hero", type: "HERO", label: "Portada", order: 1, isVisible: true },
   { id: "about", type: "SPLIT_ABOUT", label: "Sobre nosotros", order: 2, isVisible: true },
   { id: "services", type: "SERVICES_SHOWCASE", label: "Nuestros servicios", order: 3, isVisible: true },
-  { id: "academy", type: "ACADEMY_BANNER", label: "Ingenieros de sonido", order: 4, isVisible: true },
+  { id: "academy", type: "ACADEMY_BANNER", label: "Ingeniería de sonido", order: 4, isVisible: true },
   { id: "clients", type: "CLIENTS_CAROUSEL", label: "Nuestros clientes", order: 5, isVisible: true },
   { id: "socials", type: "SOCIALS", label: "Redes sociales", order: 6, isVisible: true },
   { id: "faq", type: "FAQ", label: "Preguntas frecuentes", order: 7, isVisible: true },

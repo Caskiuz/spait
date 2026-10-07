@@ -54,7 +54,7 @@ export function Section({
  */
 export function GlowBlob({
   className,
-  color = "rgba(255,107,0,0.30)",
+  color = "rgba(235,93,26,0.30)",
   size = 520,
   animate = true,
 }: {

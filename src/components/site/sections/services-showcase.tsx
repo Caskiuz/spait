@@ -205,7 +205,7 @@ function ServiceTile({
           className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           style={{
             background:
-              "linear-gradient(to top, rgba(255,107,0,0.28) 0%, transparent 55%)",
+              "linear-gradient(to top, rgba(235,93,26,0.28) 0%, transparent 55%)",
           }}
         />
 

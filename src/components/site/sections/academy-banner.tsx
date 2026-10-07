@@ -44,7 +44,7 @@ export function AcademyBanner({
       <GlowBlob
         className="-left-24 bottom-0 opacity-45"
         size={420}
-        color="rgba(255,107,0,0.3)"
+        color="rgba(235,93,26,0.3)"
       />
 
       <Container className="relative">
@@ -169,7 +169,7 @@ function EnrollCard({
         className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full opacity-70 blur-3xl"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(255,107,0,0.4) 0%, transparent 70%)",
+            "radial-gradient(circle at center, rgba(235,93,26,0.4) 0%, transparent 70%)",
         }}
       />
 

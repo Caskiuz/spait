@@ -220,6 +220,7 @@ async function seedServices() {
         titleLead: service.titleLead,
         titleAccent: service.titleAccent,
         order: service.order,
+        areaOrder: service.areaOrder,
         isFeatured: service.isFeatured,
         areaLabel: service.areaLabel,
         areaDescription: service.areaDescription,
@@ -272,6 +273,7 @@ async function seedServices() {
         serviceId: created.id,
         number: solution.number,
         title: solution.title,
+        description: solution.description,
         order: index,
       })),
     });

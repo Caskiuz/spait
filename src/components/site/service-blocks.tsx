@@ -18,7 +18,7 @@ export function ServiceIntro({ service }: { service: ServiceContent }) {
       <GlowBlob
         className="-right-40 top-0 opacity-45"
         size={520}
-        color="rgba(255,107,0,0.24)"
+        color="rgba(235,93,26,0.24)"
       />
 
       <Container className="relative">
@@ -106,16 +106,25 @@ export function ServiceSolutions({ service }: { service: ServiceContent }) {
           <RevealGroup className="flex flex-col gap-3">
             {service.solutions.map((solution) => (
               <RevealItem key={solution.number}>
-                <div className="group relative flex items-center gap-5 overflow-hidden rounded-pill bg-gradient-brand px-5 py-3.5 shadow-[0_14px_38px_-20px_rgba(255,107,0,0.95)] md:gap-7 md:px-7 md:py-4">
+                <div className="group relative flex items-center gap-5 overflow-hidden rounded-card bg-gradient-brand px-5 py-4 shadow-[0_14px_38px_-20px_rgba(235,93,26,0.95)] md:gap-7 md:px-7">
                   <span
                     aria-hidden
                     className="font-display text-4xl font-black leading-none text-white/35 md:text-5xl"
                   >
                     {solution.number}
                   </span>
-                  <span className="font-display text-[13px] font-extrabold uppercase tracking-wide text-white md:text-[15px]">
-                    {solution.title}
+
+                  <span className="min-w-0">
+                    <span className="block font-display text-[13px] font-black uppercase tracking-wide text-white md:text-[15px]">
+                      {solution.title}
+                    </span>
+                    {solution.description ? (
+                      <span className="mt-1 block text-[11px] leading-snug text-white/80 md:text-xs">
+                        {solution.description}
+                      </span>
+                    ) : null}
                   </span>
+
                   <span
                     aria-hidden
                     className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white/15 to-transparent"
@@ -147,7 +156,7 @@ export function ServiceSolutions({ service }: { service: ServiceContent }) {
                 </p>
               </div>
 
-              <span className="absolute right-4 top-4 flex flex-col items-center rounded-2xl bg-gradient-brand px-3.5 py-2 text-center shadow-[0_12px_30px_-14px_rgba(255,107,0,0.9)]">
+              <span className="absolute right-4 top-4 flex flex-col items-center rounded-2xl bg-gradient-brand px-3.5 py-2 text-center shadow-[0_12px_30px_-14px_rgba(235,93,26,0.9)]">
                 <span className="font-display text-base font-black leading-none text-white">
                   {card.badgeValue}
                 </span>
@@ -193,6 +202,7 @@ export function ServiceApplications({ service }: { service: ServiceContent }) {
                 key={application.title}
                 title={application.title}
                 description={application.description}
+                number={application.number}
               />
             ))}
           </div>
@@ -241,6 +251,7 @@ export function ServiceApplications({ service }: { service: ServiceContent }) {
                 key={application.title}
                 title={application.title}
                 description={application.description}
+                number={application.number}
               />
             ))}
           </div>
@@ -253,17 +264,25 @@ export function ServiceApplications({ service }: { service: ServiceContent }) {
 function ApplicationCard({
   title,
   description,
+  number,
 }: {
   title: string;
   description: string;
+  number?: string;
 }) {
   return (
     <div className="h-full rounded-card border border-hairline bg-ink-900/60 p-5 transition-colors duration-300 hover:border-brand-600/40">
-      <h3 className="flex items-start gap-2.5 font-display text-[12px] font-extrabold uppercase leading-snug tracking-wide text-brand-500">
-        <span
-          aria-hidden
-          className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-600"
-        />
+      <h3 className="flex items-start gap-2.5 font-display text-[12px] font-black uppercase leading-snug tracking-wide text-brand-500">
+        {number ? (
+          <span aria-hidden className="shrink-0 tabular-nums">
+            {number}
+          </span>
+        ) : (
+          <span
+            aria-hidden
+            className="mt-1.5 size-1.5 shrink-0 rounded-full bg-brand-600"
+          />
+        )}
         {title}
       </h3>
       <p className="mt-2.5 pl-4 text-xs leading-relaxed text-fog-400">

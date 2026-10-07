@@ -96,7 +96,8 @@ export default async function ServicePage({
         titleLead={serviciosPageContent.heroTitleLead}
         titleAccent={serviciosPageContent.heroTitleAccent}
         subtitle={serviciosPageContent.heroSubtitle}
-        imageKey="hero-servicios"
+        imageKey={service.imageKeys[0] ?? "hero-servicios"}
+        variant="tenue"
       />
 
       <ServiceIntro service={service} />
