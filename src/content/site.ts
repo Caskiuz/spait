@@ -207,17 +207,17 @@ export const course: CourseContent = {
   badges: [
     {
       title: "100% PRÁCTICA",
-      description: "En nuestras aulas",
+      description: "Desde el primer día de clases",
       icon: "practice",
     },
     {
       title: "CERTIFICACIÓN",
-      description: "Certificados por módulo",
+      description: "En cada módulo pedagógico",
       icon: "certificate",
     },
     {
       title: "SALIDAS LABORALES",
-      description: "Audio, televisión y más",
+      description: "En la industria musical, audiovisual y de eventos",
       icon: "jobs",
     },
   ],
@@ -281,10 +281,10 @@ export const course: CourseContent = {
   facilitiesIntro:
     "Contamos con ambientes acondicionados acústicamente y equipados con tecnología profesional.",
   facilities: [
-    { title: "ESTUDIO DE GRABACIÓN PROFESIONAL", imageKey: "course-studio" },
-    { title: "AULAS ACONDICIONADAS ACÚSTICAMENTE", imageKey: "course-classroom" },
-    { title: "LABORATORIO DE INFORMÁTICA MUSICAL", imageKey: "course-lab" },
-    { title: "EQUIPOS DE ÚLTIMA GENERACIÓN", imageKey: "course-gear" },
+    { title: "ESTUDIO DE GRABACIÓN PROFESIONAL", imageKey: "home-nosotros" },
+    { title: "AULAS ACONDICIONADAS ACÚSTICAMENTE", imageKey: "nosotros-imagenes" },
+    { title: "LABORATORIO DE AUDIO DIGITAL", imageKey: "fondo-matriculate" },
+    { title: "EQUIPOS DE ÚLTIMA GENERACIÓN", imageKey: "servicio-control" },
   ],
   outcomesIntro:
     "El egresado de Sound Tech Perú estará capacitado para desempeñarse en:",
@@ -297,11 +297,11 @@ export const course: CourseContent = {
   ],
   trendsTitle: "Tendencias de este año",
   trends: [
-    { title: "Audio inmersivo (Dolby Atmos)" },
-    { title: "Inteligencia Artificial en producción de audio" },
+    { title: "Audio Inmersivo (Dolby Atmos)" },
+    { title: "Inteligencia Artificial en Producción de Audio" },
     { title: "Redes de Audio Digital (Dante / AES67)" },
-    { title: "Streaming y producción remota" },
-    { title: "Realidad virtual y sonido 3D" },
+    { title: "Streaming y Producción Híbrida" },
+    { title: "Realidad Virtual y Sonido 3D" },
   ],
   isPublished: true,
 };
