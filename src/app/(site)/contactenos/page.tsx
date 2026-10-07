@@ -29,11 +29,13 @@ export default async function ContactenosPage() {
 
   return (
     <>
-      {/* «CONTÁCTENOS» es una sola palabra: sin el bicolor partido, que se leia
-          como «contácte nos». */}
+      {/* Bicolor como en la referencia: «CONTÁCTE» en blanco y «NOS» en
+          naranja. Sin espacio entre las dos partes, para que se lea como la
+          palabra que es y no como «contácte nos». */}
       <PageHero
-        titleLead="CONTÁCTENOS"
-        titleAccent=""
+        titleLead="CONTÁCTE"
+        titleAccent="NOS"
+        accentJoined
         subtitle="Hablemos de tu próximo proyecto"
         imageKey="deco-disco"
         variant="tenue"

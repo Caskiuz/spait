@@ -373,10 +373,9 @@ export const pageHeroes: Record<string, PageHeroContent> = {
   },
   contactenos: {
     slug: "contactenos",
-    // «CONTÁCTENOS» es una sola palabra: el bicolor se reserva para el resto
-    // de titulares, aqui iria partida en dos y se leia «contácte nos».
-    heroTitleLead: "CONTÁCTENOS",
-    heroTitleAccent: "",
+    // Bicolor como en el diseño: «CONTÁCTE» en blanco y «NOS» en naranja.
+    heroTitleLead: "CONTÁCTE",
+    heroTitleAccent: "NOS",
     heroSubtitle: "Hablemos de tu próximo proyecto",
     heroImageKey: "hero-contacto",
     seoTitle: "Contáctenos",

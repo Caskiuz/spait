@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 export function PageHero({
   titleLead,
   titleAccent,
+  accentJoined = false,
   subtitle,
   imageKey,
   priority = true,
@@ -26,6 +27,9 @@ export function PageHero({
 }: {
   titleLead: string;
   titleAccent: string;
+  /** Une las dos partes del titular sin espacio (para palabras partidas en
+   *  dos tonos, como «CONTÁCTE» + «NOS»). */
+  accentJoined?: boolean;
   subtitle?: string;
   imageKey: string;
   priority?: boolean;
@@ -70,7 +74,9 @@ export function PageHero({
 
       <Container className="relative text-center">
         <h1 className="headline text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem]">
-          <span className="text-white">{titleLead} </span>
+          <span className="text-white">
+            {accentJoined ? titleLead : `${titleLead} `}
+          </span>
           <span className="text-gradient-brand">{titleAccent}</span>
         </h1>
 

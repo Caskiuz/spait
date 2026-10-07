@@ -75,12 +75,12 @@ export default async function HomePage() {
         posterKey="hero-video-poster"
       />
 
-      {/* En la portada el titular va íntegramente en blanco, como en la
-          referencia; el bicolor se reserva para la página de servicios. */}
+      {/* Bicolor como en la referencia: «DIVISIÓN DE PROYECTOS» en blanco y
+          «CON MÁS DE 10 AÑOS» en naranja. */}
       <AboutSplit
         eyebrow={homeContent.about.eyebrow}
         titleLead={homeContent.about.titleLead}
-        titleAccent=""
+        titleAccent={homeContent.about.titleAccent}
         body={homeContent.about.body}
         cta={homeContent.about.cta}
         imageKey="home-nosotros"
