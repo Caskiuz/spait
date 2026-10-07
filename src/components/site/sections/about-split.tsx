@@ -44,7 +44,7 @@ export function AboutSplit({
       />
 
       <Container className="relative">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
           <Reveal>
             <p className="eyebrow mb-3">{eyebrow}</p>
             {/* El titular va en dos lineas: «DIVISIÓN DE PROYECTOS» y debajo
@@ -61,9 +61,9 @@ export function AboutSplit({
           </Reveal>
 
           {/* El disco que envio el disenador, sin recortar. Pidió dejarlo a la
-              mitad de tamano: es solo un adorno. */}
+              mitad de tamano y mas centrado: es solo un adorno. */}
           <Reveal delay={0.1} className="hidden lg:block">
-            <div className="relative flex justify-end lg:pt-2">
+            <div className="relative flex justify-center">
               <MediaImage
                 mediaKey={decorativeKey}
                 fill={false}
