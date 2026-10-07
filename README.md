@@ -99,6 +99,9 @@ Anótala antes de cerrar la terminal. Luego entra en
 | `npm run shots` | Capturas de todas las páginas en 3 resoluciones |
 | `npm run db:seed` | Carga el contenido base en la base de datos |
 | `npm run db:studio` | Explorador visual de la base de datos |
+| `node scripts/import-client-assets.mjs` | Importa y optimiza los recursos del cliente |
+| `node scripts/convert-video.mjs` | Convierte el vídeo del banner a MP4 y WebM |
+| `node scripts/preview-material.mjs` | Hoja de contacto para revisar el material recibido |
 | `node scripts/fetch-media.mjs` | Descarga las imágenes de marcador de posición |
 | `node scripts/optimize-media.mjs` | Redimensiona y recomprime `public/media` |
 | `node scripts/generate-media-manifest.mjs` | Regenera `src/content/media.ts` |
@@ -181,13 +184,18 @@ tests/
 
 ## Pendientes del cliente
 
-- Logo vectorial real y fotografías propias (hoy hay marcadores de posición
-  libres — ver `public/media/ATRIBUCIONES.md`).
-- URLs definitivas de Discord, X y Pinterest (las actuales son provisionales).
-- Razón social, RUC y dirección fiscal para completar la política de privacidad.
-- Revisión del diseño móvil: las capturas entregadas son solo de escritorio.
-
----
+- **Licencia web de BR Firma.** El diseñador envió los archivos de escritorio;
+  conviene confirmar que la licencia cubre el uso en web antes de publicar.
+- **Cableado Estructurado**: es el único servicio sin PDF propio. El primer
+  párrafo es del cliente y el resto sigue provisional.
+- **URLs definitivas** de Facebook, Instagram y TikTok: los perfiles están
+  marcados como pendientes en .
+- **Correo de contacto**: el material solo indica el teléfono y el dominio, así
+  que se mantiene  sin confirmar.
+- **Razón social, RUC y dirección** para completar la política de privacidad.
+- **Fotos para las páginas sin diseño**: proyectos, galería y clientes usan
+  todavía marcadores de posición, porque el cliente solo entregó Home y Nosotros.
+- **Resend** para los avisos por correo de nuevos prospectos.
 
 ## Licencias de las imágenes
 
