@@ -10,7 +10,7 @@
  * Es re-ejecutable: sobrescribe los archivos de destino.
  */
 
-import { mkdir, writeFile, access } from "node:fs/promises";
+import { mkdir, writeFile, readFile, access } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
@@ -166,9 +166,11 @@ const RECURSOS = {
     formato: "png",
     alt: "Textura de puntos decorativa",
   },
+  // El disenador pidio expresamente este archivo: el otro (`discooo.png`)
+  // tiene el disco recortado por la izquierda y por abajo.
   "deco-disco": {
-    origen: path.join(HOME, "discooo.png"),
-    ancho: 620,
+    origen: path.join(HOME, "8bf07ad7-700d-4635-9570-ed53050db6cd.png"),
+    ancho: 900,
     formato: "png",
     alt: "Disco con anillos naranjas",
   },
@@ -222,20 +224,22 @@ const RECURSOS = {
   },
 
   /* --- Insignias del programa de estudios ------------------------------- */
+  // Los nombres de archivo no dicen cual es cual: se identifico cada icono
+  // abriendolo (escudo con check, trofeo y maletin).
   "insignia-practica": {
-    origen: path.join(HOME, "iconos/4cf0815c-fc7f-4a59-88fd-d365ef64edc8.png"),
-    ancho: 160,
-    formato: "png",
-    alt: "",
-  },
-  "insignia-certificacion": {
     origen: path.join(HOME, "iconos/444823b3-b854-4dea-be72-a4b5d53136dd.png"),
     ancho: 160,
     formato: "png",
     alt: "",
   },
-  "insignia-salidas": {
+  "insignia-certificacion": {
     origen: path.join(HOME, "iconos/260f91e5-aedd-426b-82e1-4ed165c39035.png"),
+    ancho: 160,
+    formato: "png",
+    alt: "",
+  },
+  "insignia-salidas": {
+    origen: path.join(HOME, "iconos/4cf0815c-fc7f-4a59-88fd-d365ef64edc8.png"),
     ancho: 160,
     formato: "png",
     alt: "",
@@ -339,9 +343,18 @@ async function main() {
   }
 
   // Textos alternativos, para que el generador del manifiesto los use.
+  // Se mezclan con los que ya hubiera: otros importadores (la galeria, por
+  // ejemplo) escriben en este mismo archivo.
+  const rutaAlt = path.join(OUT, "alt-textos.json");
+  let previos = {};
+  try {
+    previos = JSON.parse(await readFile(rutaAlt, "utf8"));
+  } catch {
+    // Todavia no existe el archivo.
+  }
   await writeFile(
-    path.join(OUT, "alt-textos.json"),
-    `${JSON.stringify(Object.fromEntries(alt.map((a) => [a.clave, a.alt])), null, 2)}\n`,
+    rutaAlt,
+    `${JSON.stringify({ ...previos, ...Object.fromEntries(alt.map((a) => [a.clave, a.alt])) }, null, 2)}\n`,
     "utf8",
   );
 

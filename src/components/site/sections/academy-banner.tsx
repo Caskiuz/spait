@@ -61,20 +61,25 @@ export function AcademyBanner({
             </p>
 
             {bullets?.length ? (
-              <ul className="mt-7 flex flex-col gap-2.5">
-                {bullets.map((bullet) => (
-                  <li
-                    key={bullet}
-                    className="flex items-center gap-3 text-sm text-fog-200"
-                  >
-                    <span
-                      aria-hidden
-                      className="size-1.5 shrink-0 rounded-full bg-brand-600"
-                    />
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
+              <>
+                <p className="mt-7 font-display text-sm font-extrabold uppercase tracking-wide text-brand-500">
+                  ¿Por qué elegirnos?
+                </p>
+                <ul className="mt-4 flex flex-col gap-2.5">
+                  {bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex items-center gap-3 text-sm text-fog-200"
+                    >
+                      <span
+                        aria-hidden
+                        className="size-1.5 shrink-0 rounded-full bg-brand-600"
+                      />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </>
             ) : null}
 
             <div className="mt-9">
@@ -151,6 +156,13 @@ export function EnrollBanner({
    Tarjeta "Matricúlate"
    ========================================================================== */
 
+/** Insignias con los iconos que envió el diseñador (escudo, trofeo, maletín). */
+const INSIGNIAS = [
+  { key: "insignia-practica", alt: "", label: "100% prácticas" },
+  { key: "insignia-certificacion", alt: "", label: "Certificación aprobada" },
+  { key: "insignia-salidas", alt: "", label: "Salidas laborales" },
+] as const;
+
 function EnrollCard({
   title,
   subtitle,
@@ -184,10 +196,34 @@ function EnrollCard({
         </ButtonLink>
 
         {!compact ? (
-          <p className="mt-6 text-xs leading-relaxed text-fog-400">
-            Contamos con ambientes acondicionados acústicamente y equipados con
-            <span className="font-semibold text-brand-400"> Tecnología Profesional</span>
-          </p>
+          <>
+            <p className="mt-6 text-xs leading-relaxed text-fog-400">
+              Contamos con ambientes acondicionados acústicamente y equipados con
+              <span className="font-semibold text-brand-400"> Tecnología Profesional</span>
+            </p>
+
+            <ul className="mt-5 grid grid-cols-3 gap-2 border-t border-hairline pt-5">
+              {INSIGNIAS.map((insignia) => (
+                <li
+                  key={insignia.key}
+                  className="flex flex-col items-center gap-1.5 text-center"
+                >
+                  <MediaImage
+                    mediaKey={insignia.key}
+                    alt={insignia.alt}
+                    fill={false}
+                    width={28}
+                    height={28}
+                    sizes="28px"
+                    className="size-7 object-contain"
+                  />
+                  <span className="text-[10px] leading-tight text-fog-400">
+                    {insignia.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </>
         ) : null}
       </div>
     </div>

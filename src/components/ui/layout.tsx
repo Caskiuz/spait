@@ -30,7 +30,10 @@ export function Section({
 }) {
   const tones = {
     base: "",
-    raised: "bg-ink-925/60",
+    // El tono se desvanece en los bordes para que la union con las secciones
+    // vecinas sea de un solo color y no se vea el escalon.
+    raised:
+      "bg-gradient-to-b from-transparent via-ink-925/60 to-transparent",
     sunken: "bg-ink-950",
   } as const;
 

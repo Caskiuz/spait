@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { MediaImage } from "@/components/site/media-image";
 import { PageHero } from "@/components/site/page-hero";
 import { ButtonLink } from "@/components/ui/button";
-import { Container, DotPattern, GlowBlob, Section } from "@/components/ui/layout";
+import { Container, GlowBlob, Section } from "@/components/ui/layout";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { AcademyBanner } from "@/components/site/sections/academy-banner";
 import { ClientsCarousel } from "@/components/site/sections/clients-carousel";
@@ -71,14 +71,6 @@ export default async function NosotrosPage() {
   const [clients] = await Promise.all([getClients()]);
   const services = servicesByArea;
 
-  // Imagenes que el disenador ya envio montadas para esta seccion.
-  const galleryKeys = [
-    "nosotros-imagenes",
-    "nosotros-banner",
-    "home-nosotros",
-    "fondo-clientes",
-  ];
-
   return (
     <>
       <PageHero
@@ -98,20 +90,35 @@ export default async function NosotrosPage() {
         />
 
         <Container className="relative">
-          <Reveal>
-            <p className="eyebrow mb-3">{nosotrosContent.projects.eyebrow}</p>
-            <h2 className="headline max-w-3xl text-3xl md:text-4xl lg:text-[2.9rem]">
-              <span className="text-white">
-                {nosotrosContent.projects.titleLead}{" "}
-              </span>
-              <span className="text-gradient-brand">
-                {nosotrosContent.projects.titleAccent}
-              </span>
-            </h2>
-            <p className="mt-6 max-w-3xl text-[0.9rem] leading-relaxed text-fog-400">
-              {nosotrosContent.projects.body}
-            </p>
-          </Reveal>
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-14">
+            <Reveal>
+              <p className="eyebrow mb-3">{nosotrosContent.projects.eyebrow}</p>
+              <h2 className="headline max-w-3xl text-3xl md:text-4xl lg:text-[2.9rem]">
+                <span className="text-white">
+                  {nosotrosContent.projects.titleLead}{" "}
+                </span>
+                <span className="text-gradient-brand">
+                  {nosotrosContent.projects.titleAccent}
+                </span>
+              </h2>
+              <p className="mt-6 max-w-3xl text-[0.9rem] leading-relaxed text-fog-400">
+                {nosotrosContent.projects.body}
+              </p>
+            </Reveal>
+
+            {/* El disco decorativo de la referencia, sin recortar. */}
+            <Reveal delay={0.1} className="hidden lg:block">
+              <MediaImage
+                mediaKey="deco-disco"
+                alt=""
+                fill={false}
+                width={900}
+                height={778}
+                sizes="(max-width: 1280px) 24rem, 28rem"
+                className="ml-auto h-auto w-full max-w-md"
+              />
+            </Reveal>
+          </div>
 
           {/* Areas de proyecto */}
           <RevealGroup className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-12">
@@ -127,27 +134,20 @@ export default async function NosotrosPage() {
       {/* Galeria + cierre */}
       <Section className="pt-0">
         <Container>
-          <Reveal className="relative">
-            <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-              {galleryKeys.map((key, index) => (
-                <div
-                  key={key}
-                  className={
-                    "relative overflow-hidden rounded-card " +
-                    (index % 2 === 1 ? "mt-6 lg:mt-0" : "")
-                  }
-                >
-                  <div className="aspect-4/3">
-                    <MediaImage
-                      mediaKey={key}
-                      sizes="(max-width: 1024px) 46vw, 23vw"
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              ))}
+          {/* El disenador envio la tira ya montada, con los puntitos
+              incorporados. */}
+          <Reveal>
+            <div className="overflow-hidden rounded-card">
+              <MediaImage
+                mediaKey="nosotros-imagenes"
+                alt="Ambientes de Sound Tech Perú"
+                fill={false}
+                width={1800}
+                height={700}
+                sizes="(max-width: 1024px) 100vw, 90vw"
+                className="h-auto w-full"
+              />
             </div>
-            <DotPattern className="-left-4 bottom-4 size-20 opacity-35" />
           </Reveal>
 
           <Reveal delay={0.1} className="mx-auto mt-12 max-w-3xl text-center">
@@ -167,14 +167,23 @@ export default async function NosotrosPage() {
         </Container>
       </Section>
 
+      {/* Igual que en la portada: mismas ventajas, mismas insignias y el
+          mismo fondo. */}
       <AcademyBanner
         eyebrow={homeContent.academy.eyebrow}
         titleLead={homeContent.academy.titleLead}
         titleAccent={homeContent.academy.titleAccent}
         body={homeContent.academy.body}
+        bullets={[
+          "Docentes profesionales",
+          "Enfoque 100% práctico",
+          "Estudio de grabación propio",
+          "Certificación por módulo",
+          "Alta demanda laboral",
+        ]}
         cta={homeContent.academy.cta}
         enrollCard={homeContent.academy.enrollCard}
-        imageKey="academy-photo"
+        imageKey="fondo-matriculate"
       />
 
       <ClientsCarousel
@@ -183,7 +192,7 @@ export default async function NosotrosPage() {
         titleLead={homeContent.clients.titleLead}
         titleAccent={homeContent.clients.titleAccent}
         subtitle={homeContent.clients.subtitle}
-        tone="raised"
+        withBackground
       />
     </>
   );

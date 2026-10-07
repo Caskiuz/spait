@@ -6,11 +6,11 @@ import { AcademyBanner } from "@/components/site/sections/academy-banner";
 import { ClientsCarousel } from "@/components/site/sections/clients-carousel";
 import { SocialsSection } from "@/components/site/sections/socials-section";
 import { FaqSection } from "@/components/site/sections/faq-section";
+import { ColorLine } from "@/components/site/color-line";
 import { homeContent } from "@/content";
 import {
   getClients,
   getFaqs,
-  getFeaturedServices,
   getServices,
   getSiteSettings,
   getSocialLinks,
@@ -28,18 +28,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [settings, services, featured, clients, socials, faqs] =
-    await Promise.all([
-      getSiteSettings(),
-      getServices(),
-      getFeaturedServices(),
-      getClients(),
-      getSocialLinks(),
-      getFaqs(),
-    ]);
+  const [settings, services, clients, socials, faqs] = await Promise.all([
+    getSiteSettings(),
+    getServices(),
+    getClients(),
+    getSocialLinks(),
+    getFaqs(),
+  ]);
 
-  // La portada destaca los 8 primeros servicios: 4 grandes y 4 compactos.
-  const showcased = (featured.length >= 8 ? featured : services).slice(0, 8);
+  // La portada muestra los nueve servicios en el carrusel: el diseñador pidió
+  // que con la flecha derecha se puedan recorrer todos.
+  const showcased = services;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -81,7 +80,8 @@ export default async function HomePage() {
         eyebrow={homeContent.about.eyebrow}
         titleLead={homeContent.about.titleLead}
         titleAccent={homeContent.about.titleAccent}
-        body={homeContent.about.body}
+        bodyLead={homeContent.about.bodyLead}
+        bodyRest={homeContent.about.bodyRest}
         cta={homeContent.about.cta}
         imageKey="home-nosotros"
         decorativeKey="deco-disco"
@@ -118,7 +118,11 @@ export default async function HomePage() {
         titleLead={homeContent.clients.titleLead}
         titleAccent={homeContent.clients.titleAccent}
         subtitle={homeContent.clients.subtitle}
+        withBackground
       />
+
+      {/* Separador de linea de colores, como en la referencia */}
+      <ColorLine />
 
       <SocialsSection
         eyebrow={homeContent.socials.eyebrow}
@@ -127,6 +131,7 @@ export default async function HomePage() {
         body={homeContent.socials.body}
         socials={socials}
         cta={homeContent.socials.cta}
+        variant="tarjeta"
       />
 
       <FaqSection

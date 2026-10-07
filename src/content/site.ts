@@ -422,14 +422,19 @@ export const homeContent = {
   hero: {
     titleLead: "SOLUCIONES PROFESIONALES",
     titleAccent: "DE AUDIO E INTEGRACIÓN TECNOLÓGICA",
-    primaryCta: { label: "Nosotros", href: "/nosotros" },
+    primaryCta: { label: "Matricúlate", href: "/cursos#matricula" },
     secondaryCta: { label: "Ver Proyectos", href: "/proyectos" },
   },
   about: {
     eyebrow: "SOBRE NOSOTROS",
     titleLead: "DIVISIÓN DE PROYECTOS",
     titleAccent: "CON MÁS DE 10 AÑOS",
-    body: "En la venta de equipos profesionales y dedicados a la ingeniería de sonido. Sound Tech Perú continúa brindando soluciones tecnológicas y abordando la creación en el área de proyectos, para diseñar espacios trabajados basándonos en la ingeniería del audio.",
+    // El texto va partido en dos, como en la referencia: la primera frase
+    // debajo del titular y la continuación al costado de las fotografías.
+    bodyLead:
+      "En la venta de equipos profesionales y dedicados a la ingeniería de sonido. Sound Tech Perú,",
+    bodyRest:
+      "continúa brindando soluciones tecnológicas y abordando la creación en el área de proyectos, para diseñar espacios trabajados basándonos en la ingeniería del audio.",
     cta: { label: "Contáctenos", href: "/contactenos" },
   },
   services: {

@@ -60,15 +60,13 @@ export function FaqSection({
             </Reveal>
 
             <Reveal delay={0.12} className="mt-9">
+              {/* La foto va anclada abajo para que se vea la consola, y sin
+                  velo encima: el disenador la queria "mas limpia". */}
               <div className="relative aspect-4/3 overflow-hidden rounded-card-lg border border-hairline">
                 <MediaImage
                   mediaKey={imageKey}
                   sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover"
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-ink-950/70 to-transparent"
+                  className="object-cover object-bottom"
                 />
               </div>
             </Reveal>

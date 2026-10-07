@@ -24,6 +24,7 @@ export function ClientsCarousel({
   titleAccent,
   subtitle,
   tone = "base",
+  withBackground = false,
 }: {
   clients: ClientContent[];
   eyebrow?: string;
@@ -31,51 +32,66 @@ export function ClientsCarousel({
   titleAccent?: string;
   subtitle?: string;
   tone?: "base" | "raised" | "sunken";
+  /** Pone detras la consola desenfocada, como en la referencia. */
+  withBackground?: boolean;
 }) {
   if (!clients.length) return null;
 
   return (
-    <Section tone={tone} className="overflow-hidden">
-      <Container>
-        {eyebrow || titleLead ? (
-          <SectionHeading
-            eyebrow={eyebrow}
-            titleLead={titleLead}
-            titleAccent={titleAccent}
-            subtitle={subtitle}
+    <Section tone={tone} className="relative overflow-hidden">
+      {withBackground ? (
+        <div aria-hidden className="absolute inset-0">
+          <MediaImage
+            mediaKey="fondo-clientes"
+            sizes="100vw"
+            className="object-cover opacity-60"
           />
-        ) : null}
-      </Container>
+          <span className="absolute inset-0 bg-gradient-to-b from-ink-950 via-ink-950/70 to-ink-950" />
+        </div>
+      ) : null}
 
-      {/* La marquesina ocupa todo el ancho, sin el acolchado del contenedor */}
-      <div
-        className="group/marquee relative mt-12"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
-        }}
-      >
-        <ul
-          aria-label="Clientes que confían en nosotros"
-          className="no-scrollbar flex w-max animate-marquee gap-5 px-5 group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused] motion-reduce:w-full motion-reduce:animate-none motion-reduce:overflow-x-auto motion-reduce:px-5"
+      <div className="relative">
+        <Container>
+          {eyebrow || titleLead ? (
+            <SectionHeading
+              eyebrow={eyebrow}
+              titleLead={titleLead}
+              titleAccent={titleAccent}
+              subtitle={subtitle}
+            />
+          ) : null}
+        </Container>
+
+        {/* La marquesina ocupa todo el ancho, sin el acolchado del contenedor */}
+        <div
+          className="group/marquee relative mt-12"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+          }}
         >
-          {[...clients, ...clients].map((client, index) => {
-            // La segunda mitad es la copia que cierra el bucle.
-            const esCopia = index >= clients.length;
-            return (
-              <li
-                key={`${client.name}-${index}`}
-                aria-hidden={esCopia || undefined}
-                // Con movimiento reducido no hay bucle, así que la copia sobra.
-                className={esCopia ? "shrink-0 motion-reduce:hidden" : "shrink-0"}
-              >
-                <ClientCard client={client} />
-              </li>
-            );
-          })}
-        </ul>
+          <ul
+            aria-label="Clientes que confían en nosotros"
+            className="no-scrollbar flex w-max animate-marquee gap-5 px-5 group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused] motion-reduce:w-full motion-reduce:animate-none motion-reduce:overflow-x-auto motion-reduce:px-5"
+          >
+            {[...clients, ...clients].map((client, index) => {
+              // La segunda mitad es la copia que cierra el bucle.
+              const esCopia = index >= clients.length;
+              return (
+                <li
+                  key={`${client.name}-${index}`}
+                  aria-hidden={esCopia || undefined}
+                  // Con movimiento reducido no hay bucle, así que la copia sobra.
+                  className={esCopia ? "shrink-0 motion-reduce:hidden" : "shrink-0"}
+                >
+                  <ClientCard client={client} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </Section>
   );

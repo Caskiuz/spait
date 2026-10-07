@@ -7,14 +7,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Section } from "@/components/ui/layout";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { MediaImage } from "@/components/site/media-image";
 import { cn } from "@/lib/utils";
 import type { ServiceContent } from "@/content/types";
 
 /**
- * Escaparate de servicios de la portada: una fila destacada con tarjetas
- * altas y desplazamiento horizontal, y una segunda fila compacta.
+ * Escaparate de servicios de la portada.
+ *
+ * El disenador pidio que con la flecha derecha se recorran los nueve
+ * servicios, asi que el carrusel los lleva todos y desaparecio la fila
+ * compacta que repetia cuatro de ellos.
  */
 export function ServicesShowcase({
   services,
@@ -56,8 +58,7 @@ export function ServicesShowcase({
     };
   }, [emblaApi, onSelect]);
 
-  const featured = services.slice(0, 4);
-  const compact = services.slice(4, 8);
+  if (!services.length) return null;
 
   return (
     <Section id="servicios" tone="raised" className="overflow-hidden">
@@ -70,16 +71,15 @@ export function ServicesShowcase({
           size="lg"
         />
 
-        {/* Fila destacada */}
         <div className="relative mt-12">
           <div className="overflow-hidden" ref={emblaRef}>
             <ul className="flex gap-5">
-              {featured.map((service) => (
+              {services.map((service) => (
                 <li
                   key={service.slug}
                   className="min-w-0 shrink-0 grow-0 basis-[85%] sm:basis-[52%] lg:basis-[calc((100%-2.5rem)/3)]"
                 >
-                  <ServiceTile service={service} tall />
+                  <ServiceTile service={service} />
                 </li>
               ))}
             </ul>
@@ -103,19 +103,10 @@ export function ServicesShowcase({
           </button>
         </div>
 
-        {/* Fila compacta */}
-        <RevealGroup className="mt-5 grid grid-cols-2 gap-5 lg:grid-cols-4">
-          {compact.map((service) => (
-            <RevealItem key={service.slug}>
-              <ServiceTile service={service} />
-            </RevealItem>
-          ))}
-        </RevealGroup>
-
         {/* El punto visible mide 6 px, pero el area tactil es de 44 px: en
             el movil es la unica forma de pasar tarjeta ademas del gesto. */}
         {snaps.length > 1 ? (
-          <div className="mt-7 flex justify-center">
+          <div className="mt-7 flex flex-wrap justify-center">
             {snaps.map((_, index) => (
               <button
                 key={index}
@@ -148,47 +139,9 @@ export function ServicesShowcase({
   );
 }
 
-/** Tarjeta de servicio. Las altas llevan el titulo sobre la foto; las
- *  compactas lo llevan debajo, sobre el fondo de la tarjeta, como en la
+/** Tarjeta de servicio: el titulo va sobre la fotografia, como en la
  *  referencia. */
-function ServiceTile({
-  service,
-  tall,
-}: {
-  service: ServiceContent;
-  tall?: boolean;
-}) {
-  if (!tall) {
-    return (
-      <Link
-        href={`/servicios/${service.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-card border border-hairline bg-ink-900/60 transition-all duration-300 hover:border-brand-600/45 focus-visible:outline-offset-4"
-      >
-        <div className="relative aspect-4/3 overflow-hidden">
-          <MediaImage
-            mediaKey={service.imageKeys[0] ?? ""}
-            sizes="(max-width: 1024px) 45vw, 22vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <span
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-ink-950/60 to-transparent"
-          />
-        </div>
-
-        <div className="flex flex-1 flex-col p-4">
-          <h3 className="font-display text-[12px] font-extrabold uppercase leading-snug tracking-wide text-white">
-            {service.title}
-          </h3>
-          <span className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            Saber más
-            <ChevronRight className="size-3" />
-          </span>
-        </div>
-      </Link>
-    );
-  }
-
+function ServiceTile({ service }: { service: ServiceContent }) {
   return (
     <Link
       href={`/servicios/${service.slug}`}

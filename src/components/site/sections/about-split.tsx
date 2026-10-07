@@ -1,18 +1,25 @@
 import { ButtonLink } from "@/components/ui/button";
-import { Container, DotPattern, GlowBlob, Section } from "@/components/ui/layout";
-import { SectionHeading } from "@/components/ui/section-heading";
+import { Container, GlowBlob, Section } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
 import { MediaImage } from "@/components/site/media-image";
 
 /**
- * Bloque "Sobre nosotros" de la portada: titular a la izquierda, parrafo y
- * llamada a la accion a la derecha, y una composicion de dos fotografias.
+ * Bloque "Sobre nosotros" de la portada.
+ *
+ * Sigue la composicion de la referencia: titular arriba a la izquierda con el
+ * disco decorativo enfrente, el resplandor naranja lateral, y debajo las
+ * fotografias con el texto que continua al costado.
+ *
+ * El parrafo va partido en dos tramos porque asi lo pide el disenador: la
+ * primera frase queda bajo el titular y la segunda ocupa el hueco que dejan
+ * las fotografias.
  */
 export function AboutSplit({
   eyebrow,
   titleLead,
   titleAccent,
-  body,
+  bodyLead,
+  bodyRest,
   cta,
   imageKey,
   decorativeKey,
@@ -20,7 +27,8 @@ export function AboutSplit({
   eyebrow: string;
   titleLead: string;
   titleAccent: string;
-  body: string;
+  bodyLead: string;
+  bodyRest: string;
   cta: { label: string; href: string };
   /** Imagen que el diseñador ya envió montada para esta sección. */
   imageKey: string;
@@ -28,52 +36,49 @@ export function AboutSplit({
 }) {
   return (
     <Section id="sobre-nosotros" className="overflow-hidden">
+      {/* Resplandor naranja del borde derecho, como en la referencia */}
       <GlowBlob
-        className="-right-32 top-0 opacity-50"
-        size={480}
-        color="rgba(235,93,26,0.26)"
+        className="-right-24 top-1/4 opacity-70 lg:-right-16"
+        size={620}
+        color="rgba(235,93,26,0.34)"
       />
 
       <Container className="relative">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16">
           <Reveal>
-            <SectionHeading
-              eyebrow={eyebrow}
-              titleLead={titleLead}
-              titleAccent={titleAccent}
-              size="lg"
-            />
+            <p className="eyebrow mb-3">{eyebrow}</p>
+            {/* El titular va en dos lineas: «DIVISIÓN DE PROYECTOS» y debajo
+                «CON MÁS DE 10 AÑOS». Para que la primera entre en una sola
+                linea el tamano baja respecto al resto de titulares. */}
+            <h2 className="headline max-w-xl text-2xl leading-[1.1] sm:text-3xl md:text-4xl lg:text-[2.4rem]">
+              <span className="block text-white">{titleLead}</span>
+              <span className="text-gradient-brand block">{titleAccent}</span>
+            </h2>
+
+            <p className="mt-5 max-w-md text-[0.9rem] leading-relaxed text-fog-400">
+              {bodyLead}
+            </p>
           </Reveal>
 
-          {/* Composicion decorativa: altavoz circular con anillos */}
+          {/* El disco que envio el disenador, sin recortar: la imagen ya trae
+              los anillos blancos, azules y naranjas. */}
           <Reveal delay={0.1} className="hidden lg:block">
             <div className="relative flex justify-end">
-              <div className="relative size-56 overflow-hidden rounded-full xl:size-64">
-                <MediaImage
-                  mediaKey={decorativeKey}
-                  sizes="16rem"
-                  className="object-cover"
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/10"
-                />
-              </div>
-
-              <span
-                aria-hidden
-                className="absolute -bottom-6 right-2 size-24 rounded-full border border-brand-600/50 xl:size-28"
-              />
-              <span
-                aria-hidden
-                className="absolute -bottom-2 right-16 size-16 rounded-full border border-brand-500/30 xl:size-20"
+              <MediaImage
+                mediaKey={decorativeKey}
+                fill={false}
+                width={900}
+                height={778}
+                sizes="(max-width: 1280px) 26rem, 30rem"
+                className="h-auto w-full max-w-md xl:max-w-lg"
               />
             </div>
           </Reveal>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          {/* Fotografia: el disenador la envio ya compuesta */}
+        <div className="mt-12 grid gap-10 lg:mt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+          {/* Fotografia: el disenador la envio ya compuesta, con los puntitos
+              incorporados, asi que no se anade ningun adorno encima. */}
           <Reveal className="relative">
             <div className="relative aspect-16/9 overflow-hidden rounded-card">
               <MediaImage
@@ -82,13 +87,13 @@ export function AboutSplit({
                 className="object-cover"
               />
             </div>
-
-            <DotPattern className="-bottom-4 -left-6 size-24 opacity-40" />
           </Reveal>
 
-          {/* Texto */}
-          <Reveal delay={0.12} className="flex flex-col justify-center">
-            <p className="text-[0.95rem] leading-relaxed text-fog-300">{body}</p>
+          {/* Texto que continua al costado de las fotografias */}
+          <Reveal delay={0.12} className="lg:pt-8">
+            <p className="text-[0.9rem] leading-relaxed text-fog-400">
+              {bodyRest}
+            </p>
 
             <div className="mt-8">
               <ButtonLink href={cta.href} variant="outline" size="md">
