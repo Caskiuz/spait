@@ -61,7 +61,9 @@ export function VideoHero({
   const poster = getMedia(posterKey)?.url;
 
   return (
-    <section className="relative flex min-h-[86vh] items-center overflow-hidden pt-36 pb-24 md:min-h-[92vh] md:pt-40">
+    // `svh` (con `vh` de respaldo) es el alto visible real en el movil: evita
+    // que la barra del navegador tape el boton de desplazamiento y los CTA.
+    <section className="relative flex min-h-[86vh] items-center overflow-hidden pt-36 pb-24 supports-[height:100svh]:min-h-[86svh] md:min-h-[92vh] md:pt-40 md:supports-[height:100svh]:min-h-[92svh]">
       <div className="absolute inset-0">
         <video
           ref={videoRef}

@@ -21,7 +21,7 @@ const peruvianPhone = z
   .trim()
   .transform((value) => value.replace(/[\s\-().]/g, ""))
   .refine((value) => /^(\+?51)?9\d{8}$/.test(value), {
-    message: "Ingresa un celular válido de 9 dígitos (ej. 961 927 974)",
+    message: "Ingresa un celular válido de 9 dígitos (ej. 964 687 451)",
   });
 
 const optionalCompany = z
@@ -250,7 +250,7 @@ export const siteSettingsSchema = z.object({
   whatsapp: z
     .string()
     .trim()
-    .regex(/^\d{9,15}$/, "Solo dígitos, con código de país (ej. 51961927974)"),
+    .regex(/^\d{9,15}$/, "Solo dígitos, con código de país (ej. 51964687451)"),
   email: emailField,
   address: z.string().trim().max(180).optional().or(z.literal("")),
   hours: z.string().trim().max(120).optional().or(z.literal("")),

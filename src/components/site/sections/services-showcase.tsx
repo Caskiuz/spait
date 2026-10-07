@@ -112,8 +112,10 @@ export function ServicesShowcase({
           ))}
         </RevealGroup>
 
+        {/* El punto visible mide 6 px, pero el area tactil es de 44 px: en
+            el movil es la unica forma de pasar tarjeta ademas del gesto. */}
         {snaps.length > 1 ? (
-          <div className="mt-9 flex justify-center gap-2">
+          <div className="mt-7 flex justify-center">
             {snaps.map((_, index) => (
               <button
                 key={index}
@@ -121,13 +123,17 @@ export function ServicesShowcase({
                 onClick={() => emblaApi?.scrollTo(index)}
                 aria-label={`Ir al grupo de servicios ${index + 1}`}
                 aria-current={index === selected ? "true" : undefined}
-                className={cn(
-                  "size-1.5 rounded-full transition-all duration-300",
-                  index === selected
-                    ? "w-6 bg-brand-600"
-                    : "bg-fog-600 hover:bg-fog-500",
-                )}
-              />
+                className="group grid h-11 w-11 place-items-center md:h-5 md:w-5"
+              >
+                <span
+                  className={cn(
+                    "block h-1.5 rounded-full transition-all duration-300",
+                    index === selected
+                      ? "w-6 bg-brand-600"
+                      : "w-1.5 bg-fog-600 group-hover:bg-fog-500",
+                  )}
+                />
+              </button>
             ))}
           </div>
         ) : null}
@@ -171,10 +177,10 @@ function ServiceTile({
         </div>
 
         <div className="flex flex-1 flex-col p-4">
-          <h3 className="font-display text-[11px] font-extrabold uppercase leading-snug tracking-wide text-white md:text-[12px]">
+          <h3 className="font-display text-[12px] font-extrabold uppercase leading-snug tracking-wide text-white">
             {service.title}
           </h3>
-          <span className="mt-2 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             Saber más
             <ChevronRight className="size-3" />
           </span>

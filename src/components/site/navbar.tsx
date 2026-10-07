@@ -144,35 +144,46 @@ export function Navbar({
         className="pointer-events-auto lg:hidden"
       >
         {open ? (
-          <div className="shell mt-3">
-            <div className="glass-bar rounded-3xl p-4 shadow-[0_24px_60px_-30px_rgba(0,0,0,1)]">
-              <ul className="flex flex-col">
-                {items.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "block rounded-2xl px-4 py-3 font-display text-sm font-bold uppercase tracking-wide transition-colors",
-                        isActive(item.href)
-                          ? "bg-brand-600/12 text-brand-400"
-                          : "text-fog-200 hover:bg-white/5 hover:text-white",
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ButtonLink
-                href="/cotizar"
-                size="md"
-                withArrow
-                className="mt-4 w-full"
-              >
-                Cotizar Proyecto
-              </ButtonLink>
+          <>
+            {/* Capa oscura: separa el menu del contenido y lo cierra al tocar.
+                Sin ella el titular del hero se transparentaba sobre los
+                enlaces y el menu se perdia entre las demas secciones. */}
+            <button
+              type="button"
+              aria-label="Cerrar menú"
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 -z-10 bg-ink-950/80 backdrop-blur-sm"
+            />
+            <div className="shell mt-3">
+              <div className="menu-max-h overflow-y-auto overscroll-contain rounded-3xl border border-hairline-strong bg-ink-900/95 p-4 shadow-[0_24px_60px_-30px_rgba(0,0,0,1)] backdrop-blur-xl">
+                <ul className="flex flex-col">
+                  {items.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={cn(
+                          "block rounded-2xl px-4 py-3.5 font-display text-sm font-bold uppercase tracking-wide transition-colors",
+                          isActive(item.href)
+                            ? "bg-brand-600/12 text-brand-400"
+                            : "text-fog-200 hover:bg-white/5 hover:text-white",
+                        )}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <ButtonLink
+                  href="/cotizar"
+                  size="md"
+                  withArrow
+                  className="mt-4 w-full"
+                >
+                  Cotizar Proyecto
+                </ButtonLink>
+              </div>
             </div>
-          </div>
+          </>
         ) : null}
       </div>
     </header>

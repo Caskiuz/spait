@@ -38,7 +38,8 @@ export function PageHero({
   return (
     <section
       className={cn(
-        "relative flex min-h-[52vh] items-center justify-center overflow-hidden pt-32 pb-20 md:min-h-[58vh] md:pt-40 md:pb-24",
+        // `svh` (con `vh` de respaldo) refleja el alto visible real en el movil.
+        "relative flex min-h-[52vh] items-center justify-center overflow-hidden pt-32 pb-20 supports-[height:100svh]:min-h-[52svh] md:min-h-[58vh] md:pt-40 md:pb-24 md:supports-[height:100svh]:min-h-[58svh]",
         className,
       )}
     >

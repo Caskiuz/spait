@@ -17,7 +17,7 @@
     "postinstall": "prisma generate",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "shots": "tsx tests/visual/capture.ts"
+    "shots": "node tests/visual/capture.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

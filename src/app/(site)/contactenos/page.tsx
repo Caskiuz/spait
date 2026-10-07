@@ -12,7 +12,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Contáctenos",
   description:
-    "Cuéntanos qué solución necesitas y nuestro equipo se pondrá en contacto contigo. Teléfono +51 961 927 974.",
+    "Cuéntanos qué solución necesitas y nuestro equipo se pondrá en contacto contigo. Teléfono +51 964 687 451.",
   alternates: { canonical: "/contactenos" },
 };
 
@@ -29,9 +29,11 @@ export default async function ContactenosPage() {
 
   return (
     <>
+      {/* «CONTÁCTENOS» es una sola palabra: sin el bicolor partido, que se leia
+          como «contácte nos». */}
       <PageHero
-        titleLead="CONTÁCTE"
-        titleAccent="NOS"
+        titleLead="CONTÁCTENOS"
+        titleAccent=""
         subtitle="Hablemos de tu próximo proyecto"
         imageKey="deco-disco"
         variant="tenue"

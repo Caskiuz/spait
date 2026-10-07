@@ -47,7 +47,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
                 aria-selected={isActive}
                 onClick={() => setActive(category)}
                 className={cn(
-                  "h-9 rounded-full border px-5 font-display text-[11px] font-bold uppercase tracking-[0.14em] transition-all",
+                  "h-11 rounded-full border px-5 font-display text-[12px] font-bold uppercase tracking-[0.14em] transition-all",
                   isActive
                     ? "border-brand-600 bg-gradient-brand text-white"
                     : "border-hairline text-fog-300 hover:border-brand-600/60 hover:text-brand-400",
@@ -86,7 +86,7 @@ export function GalleryGrid({ items }: { items: GalleryItem[] }) {
                   <span className="block font-display text-[10px] font-bold uppercase tracking-[0.16em] text-brand-400">
                     {item.category}
                   </span>
-                  <span className="mt-1 block text-[11px] leading-snug text-fog-200">
+                  <span className="mt-1 block text-[12px] leading-snug text-fog-200">
                     {item.title}
                   </span>
                 </figcaption>

@@ -9,8 +9,15 @@ import { cn } from "@/lib/utils";
    icono a la izquierda y etiqueta en linea de ayuda.
    ========================================================================== */
 
+/* `text-base` (16 px) no es una preferencia estetica: por debajo de 16 px iOS
+   amplia la pagina entera al enfocar un campo y descuadra el formulario. */
 const controlBase =
-  "peer w-full rounded-xl border bg-ink-900/70 py-3.5 text-sm text-white placeholder:text-fog-500 transition-colors focus:outline-none focus-visible:outline-none disabled:opacity-60";
+  "peer w-full rounded-xl border bg-ink-900/70 py-3.5 text-base text-white placeholder:text-fog-500 transition-colors focus:outline-none focus-visible:outline-none disabled:opacity-60 md:text-sm";
+
+/* Etiqueta visible sobre cada campo: el marcador de posicion desaparece al
+   escribir y en el movil se pierde de vista que pide cada casilla. */
+const labelBase =
+  "text-[11px] font-semibold uppercase tracking-[0.14em] text-fog-400";
 
 const stateRing = (hasError?: boolean) =>
   hasError
@@ -64,8 +71,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <Wrapper error={error} hint={hint} className={containerClassName}>
-        <label htmlFor={fieldId} className="sr-only">
+        <label htmlFor={fieldId} className={labelBase}>
           {label}
+          {optional ? " (opcional)" : ""}
         </label>
         <div className="relative">
           {icon ? (
@@ -82,7 +90,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             id={fieldId}
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? `${fieldId}-error` : undefined}
-            placeholder={optional ? `${label} (opcional)` : label}
+            placeholder={label}
             className={cn(
               controlBase,
               stateRing(Boolean(error)),
@@ -116,8 +124,9 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
 
     return (
       <Wrapper error={error} hint={hint} className={containerClassName}>
-        <label htmlFor={fieldId} className="sr-only">
+        <label htmlFor={fieldId} className={labelBase}>
           {label}
+          {optional ? " (opcional)" : ""}
         </label>
         <div className="relative">
           {icon ? (
@@ -134,7 +143,7 @@ export const TextareaField = forwardRef<HTMLTextAreaElement, TextareaFieldProps>
             id={fieldId}
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? `${fieldId}-error` : undefined}
-            placeholder={optional ? `${label} (opcional)` : label}
+            placeholder={label}
             className={cn(
               controlBase,
               stateRing(Boolean(error)),
@@ -180,7 +189,7 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(
 
     return (
       <Wrapper error={error} hint={hint} className={containerClassName}>
-        <label htmlFor={fieldId} className="sr-only">
+        <label htmlFor={fieldId} className={labelBase}>
           {label}
         </label>
         <div className="relative">
@@ -256,12 +265,12 @@ export function ConsentField({
           type="checkbox"
           id={id}
           aria-invalid={error ? true : undefined}
-          className="mt-0.5 size-4 shrink-0 cursor-pointer appearance-none rounded border border-hairline-strong bg-ink-900 checked:border-brand-600 checked:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+          className="mt-0.5 size-5 shrink-0 cursor-pointer appearance-none rounded border border-hairline-strong bg-ink-900 checked:border-brand-600 checked:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
           {...rest}
         />
         <label
           htmlFor={id}
-          className="cursor-pointer text-[11px] leading-relaxed text-fog-400"
+          className="cursor-pointer text-[13px] leading-relaxed text-fog-300"
         >
           {children}
         </label>

@@ -3,6 +3,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container, GlowBlob, Section } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
 import { SocialIcon } from "@/components/site/social-icon";
+import { cn } from "@/lib/utils";
 import type { SocialLinkContent } from "@/content/types";
 
 /**
@@ -33,8 +34,10 @@ export function SocialsSection({
 
   if (!visible.length) return null;
 
+  // `overflow-hidden` recorta el resplandor de 620 px: sin el, la seccion
+  // ensanchaba el documento 125 px en el movil.
   return (
-    <Section className={className}>
+    <Section className={cn("overflow-hidden", className)}>
       <GlowBlob
         className="left-1/2 top-4 -translate-x-1/2 opacity-55"
         size={620}
@@ -93,7 +96,7 @@ export function SocialsSection({
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex h-9 items-center gap-2 rounded-full bg-gradient-brand px-6 font-display text-[11px] font-bold tracking-wide text-white transition-all hover:brightness-110"
+                      className="inline-flex h-10 items-center gap-2 rounded-full bg-gradient-brand px-6 font-display text-[12px] font-bold tracking-wide text-white transition-all hover:brightness-110"
                     >
                       Síguenos en
                       <span
@@ -103,7 +106,7 @@ export function SocialsSection({
                         <ArrowRight className="size-2.5" strokeWidth={3} />
                       </span>
                     </a>
-                    <p className="mt-1.5 truncate text-[11px] text-fog-400">
+                    <p className="mt-1.5 truncate text-[12px] text-fog-400">
                       {social.url.replace(/^https?:\/\//, "")}
                     </p>
                   </div>

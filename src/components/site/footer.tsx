@@ -143,14 +143,14 @@ export function Footer({
                           ? `${social.label} — ${social.note}`
                           : social.label
                       }
-                      className="grid size-9 place-items-center rounded-full border border-hairline text-fog-300 transition-all hover:border-brand-600/70 hover:text-brand-400"
+                      className="grid size-10 place-items-center rounded-full border border-hairline text-fog-300 transition-all hover:border-brand-600/70 hover:text-brand-400"
                     >
                       <SocialIcon platform={social.platform} className="size-4" />
                     </a>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 max-w-[15rem] text-xs leading-relaxed text-fog-500 lg:text-right">
+              <p className="mt-4 max-w-[15rem] text-xs leading-relaxed text-fog-400 lg:text-right">
                 {tagline}
               </p>
             </div>
@@ -161,36 +161,36 @@ export function Footer({
         <div className="border-t border-hairline">
           <div className="shell flex flex-col items-center justify-between gap-4 py-5 text-xs text-fog-400 md:flex-row">
             <p>
-              <span className="font-semibold text-fog-200">Soundtechperu</span>
+              <span className="font-semibold text-fog-200">Sound Tech Perú</span>
               <span className="mx-2 text-fog-600">©</span>
               Todos los derechos reservados
             </p>
 
             <Link
               href="/politica-de-privacidad"
-              className="transition-colors hover:text-brand-400"
+              className="inline-block py-1.5 transition-colors hover:text-brand-400"
             >
               Política de privacidad
             </Link>
 
-            <p className="flex items-center gap-3">
+            <p className="flex items-center gap-4">
               <a
                 href="https://www.instagram.com/soundtechperu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand-500 transition-colors hover:text-brand-400"
+                className="inline-block py-1.5 text-brand-500 transition-colors hover:text-brand-400"
               >
                 Instagram
               </a>
               <a
                 href={`mailto:${email}`}
-                className="text-brand-500 transition-colors hover:text-brand-400"
+                className="inline-block py-1.5 text-brand-500 transition-colors hover:text-brand-400"
               >
                 Email
               </a>
               <Link
                 href="/redes-sociales"
-                className="text-brand-500 transition-colors hover:text-brand-400"
+                className="inline-block py-1.5 text-brand-500 transition-colors hover:text-brand-400"
               >
                 Comunidad
               </Link>

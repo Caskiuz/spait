@@ -373,13 +373,15 @@ export const pageHeroes: Record<string, PageHeroContent> = {
   },
   contactenos: {
     slug: "contactenos",
-    heroTitleLead: "CONTÁCTE",
-    heroTitleAccent: "NOS",
+    // «CONTÁCTENOS» es una sola palabra: el bicolor se reserva para el resto
+    // de titulares, aqui iria partida en dos y se leia «contácte nos».
+    heroTitleLead: "CONTÁCTENOS",
+    heroTitleAccent: "",
     heroSubtitle: "Hablemos de tu próximo proyecto",
     heroImageKey: "hero-contacto",
     seoTitle: "Contáctenos",
     seoDescription:
-      "Cuéntanos qué solución necesitas y nuestro equipo se pondrá en contacto contigo. Teléfono +51 961 927 974.",
+      "Cuéntanos qué solución necesitas y nuestro equipo se pondrá en contacto contigo. Teléfono +51 964 687 451.",
   },
   cotizar: {
     slug: "cotizar",

@@ -56,14 +56,14 @@ export default async function AdminConfiguracionPage() {
                 name="phoneDisplay"
                 label="Teléfono visible"
                 defaultValue={settings.phoneDisplay}
-                hint="Como se muestra en el sitio: +51 961 927 974"
+                hint="Como se muestra en el sitio: +51 964 687 451"
                 required
               />
               <TextInput
                 name="whatsapp"
                 label="WhatsApp (solo dígitos)"
                 defaultValue={settings.whatsapp}
-                hint="Con código de país y sin espacios: 51961927974"
+                hint="Con código de país y sin espacios: 51964687451"
                 required
               />
               <TextInput

@@ -138,6 +138,7 @@ prisma/
   schema.prisma          modelo de datos completo
   seed.ts                carga el contenido de las capturas
 public/media/            imágenes (ver ATRIBUCIONES.md)
+public/fonts/            BR Firma en woff2 (se precargan 3 de los 6 pesos)
 scripts/                 utilidades de medios
 src/
   app/
@@ -156,7 +157,8 @@ src/
     actions/             mutaciones del panel
 tests/
   unit/                  Vitest
-  visual/                capturas para comparar con las referencias
+  visual/                capturas en 4 resoluciones (1440, 1024, 390 y 360 px)
+                         con comprobacion automatica de desbordamiento horizontal
 ```
 
 > Las capturas de diseño del cliente viven en `docs/referencias/` en la máquina
@@ -179,6 +181,27 @@ tests/
   (importante para SEO y accesibilidad).
 - **El campo trampa no se valida.** Si lo rechazáramos, el bot aprendería qué
   campo lo delata; se acepta y se descarta en silencio.
+
+---
+
+## Experiencia móvil
+
+Reglas que se aplican en todo el sitio y conviene no romper:
+
+- **Nada se sale de ancho.** Cada sección recorta sus adornos (`overflow-hidden`)
+  y `html` lleva `overflow-x: clip` como red. La tanda de capturas falla si
+  alguna página mide más que la pantalla, así que un descuido se detecta solo.
+- **Áreas táctiles de 44 px.** Los puntos del carrusel de servicios se ven de
+  6 px, pero su botón mide 44; igual en filtros de galería, iconos sociales y
+  enlaces legales.
+- **Campos a 16 px en el móvil.** Por debajo de 16 px, iOS amplía la página al
+  enfocar un campo y descuadra el formulario. En escritorio siguen a 14 px.
+- **Alto real de pantalla.** Los héroes usan `svh` (con `vh` de respaldo) para
+  que la barra del navegador no tape los botones.
+- **El menú móvil es opaco, con capa oscura detrás y scroll interno**: en
+  pantallas cortas el botón de cotizar sigue siendo alcanzable.
+- **Al saltar a un ancla** (`#matricula`) el encabezado fijo no tapa el destino
+  gracias a `scroll-margin-top`.
 
 ---
 
