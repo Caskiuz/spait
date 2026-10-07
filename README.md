@@ -100,6 +100,8 @@ Anótala antes de cerrar la terminal. Luego entra en
 | `npm run db:seed` | Carga el contenido base en la base de datos |
 | `npm run db:studio` | Explorador visual de la base de datos |
 | `node scripts/import-client-assets.mjs` | Importa y optimiza los recursos del cliente |
+| `node scripts/verify-client-assets.mjs` | Compara cada activo del sitio contra su original del material |
+| `node scripts/import-galeria.mjs` | Importa las fotografías sueltas del material para la galería |
 | `node scripts/convert-video.mjs` | Convierte el vídeo del banner a MP4 y WebM |
 | `node scripts/preview-material.mjs` | Hoja de contacto para revisar el material recibido |
 | `node scripts/fetch-media.mjs` | Descarga las imágenes de marcador de posición |

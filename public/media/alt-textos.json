@@ -40,5 +40,22 @@
   "area-seguridad": "",
   "area-video": "",
   "area-cableado": "",
-  "area-telecomunicacion": ""
+  "area-telecomunicacion": "",
+  "galeria-consola-estudio": "Consola principal del estudio de grabación",
+  "galeria-ingeniero-consola": "Ingeniero de sonido trabajando en la sala de control",
+  "galeria-fader-mano": "Ajuste de un fader en la consola de mezcla",
+  "galeria-monitores-estudio": "Monitores de estudio en la sala de control",
+  "galeria-faders": "Detalle de los faders de una consola profesional",
+  "galeria-aula-audio": "Aula equipada para las clases de audio",
+  "galeria-escenario-luces": "Escenario con iluminación de evento",
+  "galeria-mezcla-digital": "Mezcla en consola digital",
+  "galeria-rack-equipos": "Rack de equipos de audio",
+  "galeria-produccion-daw": "Estación de producción con software de audio",
+  "galeria-monitor-campo": "Monitor de estudio de campo cercano",
+  "galeria-concierto-vivo": "Consola en un concierto en vivo",
+  "galeria-fader-digital": "Fader de consola digital con medidores",
+  "galeria-aula-computo": "Aula de cómputo para los cursos",
+  "galeria-escritorio-mezcla": "Escritorio de mezcla del estudio",
+  "galeria-consola-vivo": "Operación de consola en vivo",
+  "galeria-consola-penumbra": "Consola de mezcla en penumbra"
 }
