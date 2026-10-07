@@ -122,7 +122,7 @@ export function SocialsSection({
         {variant === "tarjeta" ? (
           <Reveal delay={0.15} className="mt-10">
             <div className="mx-auto max-w-2xl rounded-card-lg border border-hairline bg-ink-900/60 p-7 text-center md:p-9">
-              <ul className="flex items-center justify-center gap-8 md:gap-14">
+              <ul className="flex items-center justify-center gap-6 md:gap-12">
                 {visible.map((social) => (
                   <li key={`${social.platform}-${social.url}`}>
                     <a
@@ -130,11 +130,11 @@ export function SocialsSection({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${social.label ?? social.platform} de Sound Tech Perú`}
-                      className="grid size-16 place-items-center rounded-2xl text-white transition-transform duration-300 hover:scale-110 md:size-20"
+                      className="grid size-20 place-items-center rounded-2xl text-white transition-transform duration-300 hover:scale-110 md:size-24"
                     >
                       <SocialMark
                         platform={social.platform}
-                        className="size-10 md:size-12"
+                        className="size-14 md:size-16"
                       />
                     </a>
                   </li>

@@ -60,31 +60,33 @@ export function AboutSplit({
             </p>
           </Reveal>
 
-          {/* El disco que envio el disenador, sin recortar: la imagen ya trae
-              los anillos blancos, azules y naranjas. */}
+          {/* El disco que envio el disenador, sin recortar. Pidió dejarlo a la
+              mitad de tamano: es solo un adorno. */}
           <Reveal delay={0.1} className="hidden lg:block">
-            <div className="relative flex justify-end">
+            <div className="relative flex justify-end lg:pt-2">
               <MediaImage
                 mediaKey={decorativeKey}
                 fill={false}
                 width={900}
                 height={778}
-                sizes="(max-width: 1280px) 26rem, 30rem"
-                className="h-auto w-full max-w-md xl:max-w-lg"
+                sizes="(max-width: 1280px) 14rem, 16rem"
+                className="h-auto w-full max-w-56 xl:max-w-64"
               />
             </div>
           </Reveal>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:mt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+        <div className="mt-12 grid gap-10 lg:mt-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-center lg:gap-14">
           {/* Fotografia: el disenador la envio ya compuesta, con los puntitos
-              incorporados, asi que no se anade ningun adorno encima. */}
+              incorporados, asi que no se anade ningun adorno encima. El
+              recuadro recorta los margenes vacios de la composicion —que no
+              aportan nada— para que las fotos ganen el tamano que pidio. */}
           <Reveal className="relative">
-            <div className="relative aspect-16/9 overflow-hidden rounded-card">
+            <div className="relative aspect-[62/30] overflow-hidden rounded-card">
               <MediaImage
                 mediaKey={imageKey}
-                sizes="(max-width: 1024px) 92vw, 46vw"
-                className="object-cover"
+                sizes="(max-width: 1024px) 92vw, 58vw"
+                className="scale-[1.16] object-cover"
               />
             </div>
           </Reveal>
