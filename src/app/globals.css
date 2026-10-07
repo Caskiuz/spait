@@ -359,3 +359,87 @@
     display: none;
   }
 }
+
+/* ==========================================================================
+   Asistente virtual
+   ========================================================================== */
+
+/* Contenedor del avatar: da la perspectiva para que los anillos giren en 3D. */
+.chat-avatar {
+  perspective: 320px;
+}
+
+/* Resplandor naranja pulsante detras del simbolo del logo. */
+.chat-avatar-glow {
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    rgba(235, 93, 26, 0.6) 0%,
+    transparent 70%
+  );
+  animation: pulse-glow 4.5s ease-in-out infinite;
+}
+
+/* Anillos orbitando en 3D alrededor del avatar. */
+.chat-avatar-orbit,
+.chat-avatar-orbit-b {
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.chat-avatar-orbit {
+  border: 1px solid rgba(235, 93, 26, 0.55);
+  animation: avatar-orbit 7s linear infinite;
+}
+
+.chat-avatar-orbit-b {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  animation: avatar-orbit-b 9s linear infinite;
+}
+
+@keyframes avatar-orbit {
+  from {
+    transform: rotateX(68deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(68deg) rotateZ(360deg);
+  }
+}
+
+@keyframes avatar-orbit-b {
+  from {
+    transform: rotateX(-58deg) rotateZ(360deg);
+  }
+  to {
+    transform: rotateX(-58deg) rotateZ(0deg);
+  }
+}
+
+/* Barras del indicador "esta escribiendo" (ecualizador). */
+.eq-bar {
+  width: 3px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--color-brand-500);
+  transform-origin: center;
+  animation: eq 1s ease-in-out infinite;
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-avatar-glow,
+  .chat-avatar-orbit,
+  .chat-avatar-orbit-b,
+  .eq-bar {
+    animation: none;
+  }
+}

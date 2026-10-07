@@ -55,6 +55,9 @@ const raw = {
 
   blobToken: process.env.BLOB_READ_WRITE_TOKEN,
 
+  /** Clave de Google Gemini para el asistente virtual. Solo servidor. */
+  geminiApiKey: process.env.GEMINI_API_KEY,
+
   turnstileSecret: process.env.TURNSTILE_SECRET_KEY,
   turnstileSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
 
@@ -78,6 +81,11 @@ export const env = {
   /** Hay almacenamiento de archivos configurado (subida de imagenes). */
   get hasBlob(): boolean {
     return Boolean(raw.blobToken);
+  },
+
+  /** Hay clave de Gemini: el asistente virtual responde con IA. */
+  get hasAi(): boolean {
+    return Boolean(raw.geminiApiKey);
   },
 
   /** Hay proteccion antispam de Cloudflare configurada. */
@@ -111,5 +119,6 @@ export function infrastructureStatus() {
     storage: env.hasBlob,
     captcha: env.hasTurnstile,
     rateLimit: env.hasRedis,
+    ai: env.hasAi,
   } as const;
 }

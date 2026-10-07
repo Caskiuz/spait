@@ -2,6 +2,7 @@ import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { mediaUrl } from "@/components/site/media-image";
 import { MotionProvider } from "@/components/ui/reveal";
+import { AiChatWidget } from "@/components/chat/ai-chat-widget";
 import { footerNav, mainNav } from "@/content";
 import { getSiteSettings, getSocialLinks } from "@/server/repositories/content";
 
@@ -42,6 +43,12 @@ export default async function SiteLayout({
           links={footerNav}
           socials={socials}
           tagline={settings.tagline}
+        />
+
+        <AiChatWidget
+          companyName={settings.companyName}
+          whatsapp={settings.whatsapp}
+          phoneDisplay={settings.phoneDisplay}
         />
       </div>
     </MotionProvider>
