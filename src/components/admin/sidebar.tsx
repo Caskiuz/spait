@@ -79,7 +79,7 @@ export function AdminSidebar({
         className="flex items-center gap-3 px-5 py-5"
         onClick={() => setOpen(false)}
       >
-        <Image src={logoUrl} alt="" width={32} height={32} className="size-8" />
+        <Image src={logoUrl} alt="" width={1200} height={349} className="h-8 w-auto" />
         <span className="leading-none">
           <span className="block font-display text-[13px] font-extrabold tracking-tight text-white">
             Sound Tech
@@ -155,7 +155,7 @@ export function AdminSidebar({
       {/* Barra superior en movil */}
       <div className="sticky top-0 z-40 flex items-center justify-between border-b border-hairline bg-ink-950/95 px-4 py-3 backdrop-blur lg:hidden">
         <Link href="/admin" className="flex items-center gap-2.5">
-          <Image src={logoUrl} alt="" width={28} height={28} className="size-7" />
+          <Image src={logoUrl} alt="" width={1200} height={349} className="h-6 w-auto" />
           <span className="font-display text-sm font-extrabold text-white">
             Panel
           </span>

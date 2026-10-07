@@ -32,11 +32,14 @@ export default async function AdminLoginPage({
       <Container className="relative max-w-md">
         <div className="flex flex-col items-center text-center">
           <Image
-            src={mediaUrl("logo-soundtech", "/media/logo-soundtech.svg")}
+            src={mediaUrl(
+              "logo-soundtech-simbolo",
+              "/media/logo-soundtech-simbolo.png",
+            )}
             alt=""
-            width={48}
-            height={48}
-            className="size-12"
+            width={370}
+            height={400}
+            className="h-16 w-auto"
           />
           <p className="eyebrow mt-5">Panel de administración</p>
           <h1 className="headline mt-3 text-2xl md:text-3xl">

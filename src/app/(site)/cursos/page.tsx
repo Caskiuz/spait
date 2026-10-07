@@ -92,13 +92,16 @@ export default async function CursosPage() {
 
         <Container className="relative text-center">
           <Reveal>
-            <span className="inline-flex items-center gap-2.5">
+            <span className="inline-flex items-center gap-3">
               <Image
-                src={mediaUrl("logo-soundtech", "/media/logo-soundtech.svg")}
+                src={mediaUrl(
+                  "logo-soundtech-simbolo",
+                  "/media/logo-soundtech-simbolo.png",
+                )}
                 alt=""
-                width={36}
-                height={36}
-                className="size-9"
+                width={370}
+                height={400}
+                className="h-9 w-auto"
               />
               <span className="font-display text-base font-extrabold tracking-tight text-white">
                 Sound Tech

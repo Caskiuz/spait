@@ -68,6 +68,7 @@ const ALT = {
   "socials-photo": "Ambiente de estudio de audio",
 
   "logo-soundtech": "Logotipo de Sound Tech Perú",
+  "logo-soundtech-simbolo": "Símbolo del logotipo de Sound Tech Perú",
   "hero-video-poster": "Consola de mezcla en penumbra",
   "hero-video": "Vídeo de fondo con equipos de audio",
 };
@@ -94,7 +95,6 @@ async function main() {
   for (const key of Object.keys(CLIENT_LOGOS)) {
     found.set(key, ".svg");
   }
-  found.set("logo-soundtech", ".svg");
 
   const entries = [...found.entries()].sort(([a], [b]) => a.localeCompare(b));
 

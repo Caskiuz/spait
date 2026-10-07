@@ -25,7 +25,7 @@ export default async function SiteLayout({
       <div className="flex min-h-dvh flex-col">
         <Navbar
           items={mainNav.map((i) => ({ label: i.label, href: i.href }))}
-          logoUrl={mediaUrl("logo-soundtech", "/media/logo-soundtech.svg")}
+          logoUrl={mediaUrl("logo-soundtech", "/media/logo-soundtech.png")}
           companyName={settings.companyName}
         />
 
@@ -34,7 +34,7 @@ export default async function SiteLayout({
         </main>
 
         <Footer
-          logoUrl={mediaUrl("logo-soundtech", "/media/logo-soundtech.svg")}
+          logoUrl={mediaUrl("logo-soundtech", "/media/logo-soundtech.png")}
           companyName={settings.companyName}
           phoneDisplay={settings.phoneDisplay}
           phone={settings.phone}

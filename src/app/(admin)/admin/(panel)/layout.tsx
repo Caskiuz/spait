@@ -47,7 +47,7 @@ export default async function PanelLayout({
           email: session.user.email,
           role: session.user.role,
         }}
-        logoUrl={mediaUrl("logo-soundtech", "/media/logo-soundtech.svg")}
+        logoUrl={mediaUrl("logo-soundtech", "/media/logo-soundtech.png")}
         alerts={pending}
       />
 

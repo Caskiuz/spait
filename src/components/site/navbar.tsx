@@ -70,22 +70,16 @@ export function Navbar({
             className="flex shrink-0 items-center gap-2.5 pl-1.5"
             aria-label={`${companyName} — inicio`}
           >
+            {/* El logo tal como lo envió el diseñador: símbolo y texto en un
+                solo archivo, en su proporción real (1200×349). */}
             <Image
               src={logoUrl}
               alt=""
-              width={34}
-              height={34}
-              className="size-8 md:size-9"
+              width={1200}
+              height={349}
+              className="h-9 w-auto md:h-10"
               priority
             />
-            <span className="hidden leading-none sm:block">
-              <span className="block font-display text-[15px] font-extrabold tracking-tight text-white">
-                Sound Tech
-              </span>
-              <span className="block text-[10px] font-medium uppercase tracking-[0.3em] text-brand-500">
-                Perú
-              </span>
-            </span>
           </Link>
 
           <ul className="hidden items-center gap-1 lg:flex">

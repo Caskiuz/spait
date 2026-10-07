@@ -55,24 +55,18 @@ export function Footer({
             <div className="flex flex-col gap-8 sm:flex-row sm:gap-12 md:flex-col md:gap-8">
               <Link
                 href="/"
-                className="flex items-center gap-3"
+                className="flex items-center"
                 aria-label={`${companyName} — inicio`}
               >
+                {/* El logo original del diseñador en su proporción real
+                    (1200×349). En el pie cabe completo, con el texto. */}
                 <Image
                   src={logoUrl}
                   alt=""
-                  width={48}
-                  height={48}
-                  className="size-11"
+                  width={1200}
+                  height={349}
+                  className="h-11 w-auto"
                 />
-                <span className="leading-none">
-                  <span className="block font-display text-lg font-extrabold tracking-tight text-white">
-                    Sound Tech
-                  </span>
-                  <span className="block text-[11px] font-medium uppercase tracking-[0.32em] text-brand-500">
-                    Perú
-                  </span>
-                </span>
               </Link>
 
               <div>
